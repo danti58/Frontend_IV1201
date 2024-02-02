@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 
-const BASE_URL = 'http://localhost:3001'; // Replace with your backend URL
+const BASE_URL = 'http://localhost:3000'; // Replace with your backend URL
 
-interface RegisterData {
+export interface RegisterData {
   name: string;
   surname: string;
   pnr: string;
@@ -17,7 +17,7 @@ interface RegisterResponse {
   personId?: string;
 }
 
-interface LoginData {
+export interface LoginData {
   username: string;
   password: string;
 }
@@ -39,7 +39,9 @@ export const registerPerson = async (registerData: RegisterData): Promise<Regist
 
 export const loginPerson = async (loginData: LoginData): Promise<LoginResponse> => {
   try {
+    console.log("hey")
     const response: AxiosResponse<LoginResponse> = await axios.post(`${BASE_URL}/login`, loginData);
+    console.log('response:', response);
     return response.data;
   } catch (error) {
     console.error('Error during login:', error);
