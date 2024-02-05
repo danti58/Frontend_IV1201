@@ -1,5 +1,8 @@
 import React from 'react';
 import { RegisterData } from '@/app/api';
+import Link from 'next/link';
+import '../../styles/register.css';
+
 
 interface Props {
   registerData: RegisterData;
@@ -8,10 +11,12 @@ interface Props {
 }
 
 const RegisterView: React.FC<Props> = ({ registerData, setRegisterData, handleRegister }) => (
-  <div>
-    {/* Example for one input, replicate for others */}
+  <div className="register-form">
+    <Link href="/">Go Back</Link>
+    
+    <h2>Register Form</h2>
     <label>
-      Name:
+      First Name:
       <input
         className="bg-white text-black"
         type="text"
@@ -19,9 +24,57 @@ const RegisterView: React.FC<Props> = ({ registerData, setRegisterData, handleRe
         onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
       />
     </label>
-    {/* Add other fields for surname, pnr, email, password, role_id, and username */}
+    <label>
+      Surname:
+      <input
+        className="bg-white text-black"
+        type="text"
+        value={registerData.surname}
+        onChange={(e) => setRegisterData({ ...registerData, surname: e.target.value })}
+      />
+    </label>
+    <label>
+      Personal Number:
+      <input
+        className="bg-white text-black"
+        type="text"
+        value={registerData.pnr}
+        onChange={(e) => setRegisterData({ ...registerData, pnr: e.target.value })}
+      />
+      <span className="tooltip">?
+        <span className="tooltiptext">Format: yymmddXXXX </span>
+      </span>
+    </label>
+    <label>
+      Email:
+      <input
+        className="bg-white text-black"
+        type="email"
+        value={registerData.email}
+        onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
+      />
+    </label>
+    <label>
+      Password:
+      <input
+        className="bg-white text-black"
+        type="password"
+        value={registerData.password}
+        onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
+      />
+    </label>
+    <label>
+      Username:
+      <input
+        className="bg-white text-black"
+        type="text"
+        value={registerData.username}
+        onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
+      />
+    </label>
     <button onClick={handleRegister}>Register</button>
   </div>
 );
+
 
 export default RegisterView;

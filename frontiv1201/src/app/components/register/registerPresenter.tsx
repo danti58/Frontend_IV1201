@@ -1,6 +1,7 @@
 import React from 'react';
 import { registerPerson } from '@/app/api';
 import RegisterView from './registerView';
+import { useRouter } from 'next/router';
 
 interface RegisterData {
   name: string;
@@ -13,6 +14,7 @@ interface RegisterData {
 }
 
 function RegisterPresenter () {
+  const router = useRouter();
   const [registerData, setRegisterData] = React.useState<RegisterData>({
     name: '',
     surname: '',
@@ -25,6 +27,7 @@ function RegisterPresenter () {
 
   function onRegisterSuccess(response: any) {
     console.log('Register success:', response);
+    router.push('/login');
   }
   
   function onRegisterFail(error: any) {
@@ -33,12 +36,17 @@ function RegisterPresenter () {
 
   const handleRegister = async () => {
     try {
-      const response = await registerPerson(registerData);
+      // Update the role_id to 1 right before sending.
+      const payload = { ...registerData, role_id: '1' };
+      const response = await registerPerson(payload);
       onRegisterSuccess(response);
     } catch (error) {
       onRegisterFail(error);
     }
   };
+
+  
+  
 
   return <RegisterView registerData={registerData} setRegisterData={setRegisterData} handleRegister={handleRegister} />;
 };
