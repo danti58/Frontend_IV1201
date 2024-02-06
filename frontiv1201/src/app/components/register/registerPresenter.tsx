@@ -36,8 +36,8 @@ function RegisterPresenter () {
 
   const handleRegister = async () => {
     try {
-      // Update the role_id to 1 right before sending.
-      const payload = { ...registerData, role_id: '1' };
+      // Update the role_id to 2 right before sending.
+      const payload = { ...registerData, role_id: '2' };
       const response = await registerPerson(payload);
       onRegisterSuccess(response);
     } catch (error) {
