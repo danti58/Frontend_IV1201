@@ -4,32 +4,38 @@ import { LoginData } from '@/app/api';
 interface Props {
   loginData: LoginData;
   setLoginData: (loginData: LoginData) => void;
-  handleLogin: () => void;
+  handleLogin: (event: React.FormEvent<HTMLFormElement>) => void; // Updated to handle form event
 }
 
 const LoginView: React.FC<Props> = ({ loginData, setLoginData, handleLogin }) => (
   <div>
-    <label>
-      Username:
-      <input
-        className="bg-white text-black"
-        type="text"
-        value={loginData.username}
-        onChange={(e) => setLoginData({ ...loginData, username: e.target.value })}
-      />
-    </label>
-    <label>
-      Password:
-      <input
-        className="bg-white text-black"
-        type="password"
-        value={loginData.password}
-        onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-      />
-    </label>
-    <button
-    style={{ backgroundColor: 'lightgrey', color: 'black', borderRadius: '6px'}  }
-    onClick={handleLogin}>Login</button>
+    {/* Wrap inputs with a form tag and use onSubmit event */}
+    <form onSubmit={handleLogin}>
+      <label>
+        Username:
+        <input
+          className="bg-white text-black"
+          type="text"
+          value={loginData.username}
+          onChange={(e) => setLoginData({ ...loginData, username: e.target.value })}
+        />
+      </label>
+      <label>
+        Password:
+        <input
+          className="bg-white text-black"
+          type="password"
+          value={loginData.password}
+          onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+        />
+      </label>
+      <button
+        style={{ backgroundColor: 'lightgrey', color: 'black', borderRadius: '6px'}}
+        type="submit" // Change to type submit for form submission
+      >
+        Login
+      </button>
+    </form>
   </div>
 );
 
