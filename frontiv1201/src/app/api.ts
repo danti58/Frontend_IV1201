@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
+
 const BASE_URL = 'http://localhost:3000'; // Replace with your backend URL
 
 export interface RegisterData {
@@ -42,6 +43,7 @@ export const loginPerson = async (loginData: LoginData): Promise<LoginResponse> 
     console.log("hey")
     const response: AxiosResponse<LoginResponse> = await axios.post(`${BASE_URL}/login`, loginData);
     console.log('response:', response);
+      console.log('Redux Info:', response.data.token, response.data.user.role_id, response.data.user.username);
     return response.data;
   } catch (error) {
     console.error('Error during login:', error);
