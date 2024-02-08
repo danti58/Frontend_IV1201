@@ -17,7 +17,9 @@ function LoginPresenter() {
         console.error('Login failed:', error);
     }
 
-  const handleLogin = async () => {
+  // Inside LoginPresenter component
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Prevent the default form submission behavior
     try {
       const response = await loginPerson(loginData);
       onLoginSuccess(response);
@@ -25,6 +27,7 @@ function LoginPresenter() {
       onLoginFail(error);
     }
   };
+
 
   return <LoginView loginData={loginData} setLoginData={setLoginData} handleLogin={handleLogin} />;
 };
