@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { SET_AUTH_DATA } from './actions';
 
-const authReducer = (state = { token: null, role_id: null, userName: null }, action) => {
+const authReducer = (state = { token: null, role_id: null, userName: null }, action: any) => {
 	switch (action.type) {
 		case SET_AUTH_DATA:
 			return {
