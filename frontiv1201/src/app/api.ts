@@ -27,6 +27,17 @@ interface LoginResponse {
   token?: string;
 }
 
+
+export interface CompetencyData {
+  // Properties of the competency data 
+  competencyName: string;
+  
+}
+
+interface AddCompetencyResponse {
+  message: string;
+}
+
 export const registerPerson = async (registerData: RegisterData): Promise<RegisterResponse> => {
   try {
     const response: AxiosResponse<RegisterResponse> = await axios.post(`${BASE_URL}/register`, registerData);
@@ -39,12 +50,21 @@ export const registerPerson = async (registerData: RegisterData): Promise<Regist
 
 export const loginPerson = async (loginData: LoginData): Promise<LoginResponse> => {
   try {
-    console.log("hey")
     const response: AxiosResponse<LoginResponse> = await axios.post(`${BASE_URL}/login`, loginData);
-    console.log('response:', response);
     return response.data;
   } catch (error) {
     console.error('Error during login:', error);
+    throw error;
+  }
+};
+
+// Define the function to add competency
+export const addCompetency = async (competencyData: CompetencyData): Promise<AddCompetencyResponse> => {
+  try {
+    const response: AxiosResponse<AddCompetencyResponse> = await axios.post(`${BASE_URL}/addCompetencyToPerson`, competencyData);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding competence:', error);
     throw error;
   }
 };
