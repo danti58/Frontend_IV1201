@@ -15,7 +15,7 @@ export default function Home() {
       {/* Use Link without <a> */}
       <Link href="/login" className="bg-blue-500 text-white px-4 py-2 rounded">Log in</Link>
 
-      <Link href="/addCompetencyToPerson" className="bg-blue-500 text-white px-4 py-2 rounded">Competencies</Link>
+      <Link href="/competencies" className="bg-blue-500 text-white px-4 py-2 rounded">Competencies</Link>
 
       <span className="mt-4">Don't have an account? 
         <Link href="/register" className="text-blue-500">Register here</Link>
