@@ -16,7 +16,6 @@ function LoginPresenter() {
 
   function onLoginSuccess(response: any) {
       // print response json:
-      console.log('Hej');
       console.log('Login success:', response);
   }
 
@@ -30,7 +29,6 @@ function LoginPresenter() {
     try {
         const response = await loginPerson(loginData);
         handleApiData(response);
-        //dispatch(setAuthData(response.data.token, response.data.user.role_id, response.data.user.username));
       onLoginSuccess(response);
     } catch (error) {
       onLoginFail(error);
