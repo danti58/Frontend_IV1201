@@ -1,13 +1,16 @@
+// loginPresenter.tsx
+
 import React from 'react';
 import { loginPerson, LoginData } from '@/app/api';
 import LoginView from './loginView';
 import { setAuthData } from '@/app/redux/actions';
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 function LoginPresenter() {
 
   const dispatch = useDispatch();
+  const auth = useSelector((state: any) => state.auth.userState);
+
 
   const [loginData, setLoginData] = React.useState<LoginData>({
     username: '',
@@ -37,9 +40,9 @@ function LoginPresenter() {
 
   const handleApiData = (responseData: any) => {
     const token = responseData.token;
-    const role_id = responseData.user.role_id;
     const username = responseData.user.username;
-    dispatch(setAuthData(token, role_id, username));
+    const role_id = responseData.user.role_id;
+    dispatch(setAuthData({ token, role_id, username }));
   };
 
   return <LoginView loginData={loginData} setLoginData={setLoginData} handleLogin={handleLogin} />;
