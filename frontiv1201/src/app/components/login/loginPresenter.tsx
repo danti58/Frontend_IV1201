@@ -28,6 +28,7 @@ function LoginPresenter() {
     event.preventDefault(); // Prevent the default form submission behavior
     try {
         const response = await loginPerson(loginData);
+        console.log("Hej");
         handleApiData(response);
       onLoginSuccess(response);
     } catch (error) {
