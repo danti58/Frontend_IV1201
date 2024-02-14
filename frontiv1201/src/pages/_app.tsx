@@ -6,12 +6,7 @@ import store from '@/app/redux/store';
 
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-    return (
-        <Provider store={store}>
-            <Component {...pageProps} />
-        </Provider>
-
-    );
+  return <Component {...pageProps} />;
 };
 
 export default MyApp;

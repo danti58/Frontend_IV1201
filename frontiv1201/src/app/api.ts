@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
 
-
 const BASE_URL = 'http://localhost:3000'; // Replace with your backend URL
 
 export interface RegisterData {
