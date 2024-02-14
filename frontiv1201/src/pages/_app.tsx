@@ -4,10 +4,9 @@ import '../app/globals.css'; // Adjust the path to your globals.css file
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import combineReducers from '@/app/redux/reducers';
-import { composeWithDevTools, devToolsEnhancer } from 'redux-devtools-extension';
 
 
-const store = createStore(combineReducers, devToolsEnhancer({}));
+const store = createStore(combineReducers);
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
