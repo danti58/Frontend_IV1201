@@ -37,7 +37,7 @@ function LoginPresenter() {
     }
   };
 
-    const handleApiData = (responseData: any) => {
+    const handleApiData = (responseData) => {
         const token = responseData.token;
         const role_id = responseData.user.role_id;
         const username = responseData.user.username;

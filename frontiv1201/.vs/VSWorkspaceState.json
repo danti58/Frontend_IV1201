@@ -9,6 +9,6 @@
     "\\src\\app\\redux",
     "\\src\\pages"
   ],
-  "SelectedNode": "\\src\\app\\redux\\reducers.tsx",
+  "SelectedNode": "\\src\\app\\components\\login\\loginView.tsx",
   "PreviewInSolutionExplorer": false
 }
