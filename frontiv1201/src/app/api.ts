@@ -39,9 +39,8 @@ export const registerPerson = async (registerData: RegisterData): Promise<Regist
 
 export const loginPerson = async (loginData: LoginData): Promise<LoginResponse> => {
   try {
-    console.log("hey")
-    const response: AxiosResponse<LoginResponse> = await axios.post(`${BASE_URL}/login`, loginData);
-    console.log('response:', response);
+      const response: AxiosResponse<LoginResponse> = await axios.post(`${BASE_URL}/login`, loginData);
+      console.log('response:', response);
     return response.data;
   } catch (error) {
     console.error('Error during login:', error);
