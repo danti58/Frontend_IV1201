@@ -27,6 +27,18 @@ interface LoginResponse {
   token?: string;
 }
 
+export const getApplicants = async (token: string): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axios.get(`${BASE_URL}/getApplicants`, {
+      headers: { token: `${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch applicants', error);
+    throw error;
+  }
+}
+
 export const registerPerson = async (registerData: RegisterData): Promise<RegisterResponse> => {
   try {
     const response: AxiosResponse<RegisterResponse> = await axios.post(`${BASE_URL}/register`, registerData);

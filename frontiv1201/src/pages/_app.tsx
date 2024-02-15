@@ -3,11 +3,13 @@ import type { AppProps } from 'next/app';
 import '../app/globals.css'; // Adjust the path to your globals.css file
 import { Provider } from 'react-redux';
 import store from '@/app/redux/store';
+import NavbarPresenter from '@/app/components/navbar/navbarPresenter';
 
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider store={store}>
+      <NavbarPresenter />
       <Component {...pageProps} />
     </Provider>
   );

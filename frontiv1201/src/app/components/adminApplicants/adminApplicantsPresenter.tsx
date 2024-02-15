@@ -2,27 +2,26 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import AdminApplicantsView from './adminApplicantsView';
-import axios from 'axios';
-import { AppState } from '../store'; // placeholder for redux
+import { getApplicants } from '@/app/api';
+
 
 function AdminApplicantsPresenter() {
-  const currentUser = useSelector((state: AppState) => state.currentUser);
+  const userState = useSelector((state: any) => state.auth.userState);
   const [applicants, setApplicants] = useState([]);
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
-    if (currentUser.role_id === 1) {
+    if (userState.role_id === 1) {
       setIsAuthorized(true);
       fetchApplicants();
     }
-  }, [currentUser]);
+  }, [userState]);
 
   const fetchApplicants = async () => {
     try {
-      const response = await axios.get('/getApplicants', {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      });
-      setApplicants(response.data);
+      console.log('fetching applicants using token: ' + userState.token)
+      const response = await getApplicants(userState.token);
+      setApplicants(response);
     } catch (error) {
       console.error('Failed to fetch applicants', error);
     }

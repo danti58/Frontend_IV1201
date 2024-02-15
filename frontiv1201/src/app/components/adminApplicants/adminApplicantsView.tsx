@@ -11,6 +11,8 @@ type Props = {
 function AdminApplicantsView({ applicants }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('name');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [expandedApplicantId, setExpandedApplicantId] = useState<number | null>(null);
+
 
   const sortedApplicants = [...applicants].sort((a, b) => {
     const valueA = a[sortKey];
@@ -31,17 +33,41 @@ function AdminApplicantsView({ applicants }: Props) {
     }
   };
 
+  const toggleApplicantDetails = (id: number) => {
+    if (expandedApplicantId === id) {
+      // If clicking on the same applicant, collapse it
+      setExpandedApplicantId(null);
+    } else {
+      // Expand the clicked applicant
+      setExpandedApplicantId(id);
+    }
+  };
+
   return (
-    <div>
       <div>
-        <button onClick={() => handleSortChange('name')}>Sort by Name</button>
-        <button onClick={() => handleSortChange('surname')}>Sort by Surname</button>
-        {/* Add more buttons for different sort criteria as needed */}
-      </div>
-      {sortedApplicants.map((applicant) => (
+        <button onClick={() => handleSortChange('name')} >[Sort by first name] </button>
+        <button onClick={() => handleSortChange('surname')}>[Sort by surname]</button>
+       
+        {sortedApplicants.map((applicant) => (
         <div key={applicant.person_id}>
-          <p>Name: {applicant.name} {applicant.surname}</p>
-          {/* Render other details as needed */}
+          <div onClick={() => toggleApplicantDetails(applicant.person_id)}>
+            <p>{applicant.name} {applicant.surname}</p>
+          </div>
+          {expandedApplicantId === applicant.person_id && (
+            <div style={{ border: '1px solid red', padding: '1rem' }}>
+              {/* Expanded applicant details */}
+              <p>Email: {applicant.email}</p>
+              <p>PNR: {applicant.pnr}</p>
+              <p>Username: {applicant.username}</p>
+              {/* if competencies are not null */}
+              {applicant.competencies ? (
+                <p>Competencies: {applicant.competencies.join(', ')}</p>
+              ) : (
+                <p>No competencies</p>
+              )}
+              {/* Include other details you want to show */}
+            </div>
+          )}
         </div>
       ))}
     </div>
