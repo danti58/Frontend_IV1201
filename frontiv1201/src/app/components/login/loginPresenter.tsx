@@ -5,6 +5,7 @@ import { loginPerson, LoginData } from '@/app/api';
 import LoginView from './loginView';
 import { setAuthData } from '@/app/redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import Router from 'next/router';
 
 function LoginPresenter() {
 
@@ -20,6 +21,13 @@ function LoginPresenter() {
   function onLoginSuccess(response: any) {
     // print response json:
     console.log('Login success:', response);
+    // Redirect to the home page after successful login
+    const user = response.user;
+    if (user.role_id === 1) {
+      Router.push('/adminApplicants');
+    } else {
+      Router.push('/'); // will later be replaced with the user's dashboard
+    }
   }
 
   function onLoginFail(error: any) {
