@@ -59,3 +59,14 @@ export const loginPerson = async (loginData: LoginData): Promise<LoginResponse> 
     throw error;
   }
 };
+
+// Define the function to add competency
+export const addCompetency = async (competencyData: CompetencyData): Promise<AddCompetencyResponse> => {
+  try {
+    const response: AxiosResponse<AddCompetencyResponse> = await axios.post(`${BASE_URL}/addCompetencyToPerson`, competencyData);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding competence:', error);
+    throw error;
+  }
+};
