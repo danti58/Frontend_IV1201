@@ -10,18 +10,17 @@ function CompetenciesPresenter() {
 const userState = useSelector((state: any) => state.auth.userState);
 
  const [competencyData, setCompetencyData] = React.useState<CompetencyData>({
-  username: userState.username,  
+  requestedUsername: userState.username,  
   competencyName: '', 
   yearsOfExperience: '',
     
     
-    
+ 
   });
 
 
 
-  
-
+ 
 
   function onAddCompetencySuccess(response: any) {
     // print response json:
@@ -53,7 +52,9 @@ const userState = useSelector((state: any) => state.auth.userState);
 
 
 
-  return <CompetenciesView competencyData={competencyData} setCompetencyData={setCompetencyData}  handleChange={handleChange}  />;
+
+  return <CompetenciesView competencyData={competencyData} setCompetencyData={setCompetencyData} handleChange={handleChange}  />;
+
 };
 
 export default CompetenciesPresenter;
