@@ -3,12 +3,11 @@ import { CompetencyData, LoginData } from '@/app/api';
 
 interface Props {
   competencyData: CompetencyData;
-  loginData: LoginData; // Added loginData prop
   setCompetencyData: (competencyData: CompetencyData) => void;
   handleChange: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const CompetenciesView: React.FC<Props> = ({ competencyData, loginData, setCompetencyData, handleChange }) => (
+const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, handleChange }) => (
   <div>
     <label>
       Username: {competencyData.requestedUsername} {/* Display the username from loginData */}
@@ -31,7 +30,7 @@ const CompetenciesView: React.FC<Props> = ({ competencyData, loginData, setCompe
           className="bg-white text-black"
           type="text"
           value={competencyData.yearsOfExperience}
-          onChange={(e) => setCompetencyData({ ...competencyData, yearsOfExperience: e.target.value })}
+          onChange={(e) => setCompetencyData({ ...competencyData, yearsOfExperience: parseInt(e.target.value) })}
         />
       </label>
 <br></br>
