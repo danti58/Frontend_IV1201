@@ -31,11 +31,13 @@ interface LoginResponse {
 export interface CompetencyData {
   // Properties of the competency data 
   competencyName: string;
+  yearsOfExperience: number;
   
 }
 
 interface AddCompetencyResponse {
   message: string;
+  
 }
 
 export const registerPerson = async (registerData: RegisterData): Promise<RegisterResponse> => {
