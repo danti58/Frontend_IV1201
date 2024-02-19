@@ -10,14 +10,17 @@ function CompetenciesPresenter() {
 const userState = useSelector((state: any) => state.auth.userState);
 
  const [competencyData, setCompetencyData] = React.useState<CompetencyData>({
-  username: userState.username,  
+  requestedUsername: userState.username,  
   competencyName: '', 
   yearsOfExperience: '',
     
     
-    
+ 
   });
 
+
+
+ 
 
 const [successMessage, setSuccessMessage] = React.useState<string>('');
   
@@ -46,6 +49,9 @@ const [successMessage, setSuccessMessage] = React.useState<string>('');
       onAddCompetencyFail(error);
     }
   };
+
+
+
 
 
 
