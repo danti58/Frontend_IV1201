@@ -1,27 +1,6 @@
 import React from 'react';
 import { CompetencyData, LoginData } from '@/app/api';
 
-<<<<<<< HEAD
-
-interface Props {
-  competencyData: CompetencyData;
-  loginData: LoginData;
-  setCompetencyData: (competencyData: CompetencyData) => void;
-  setLoginData: (loginData: LoginData) => void;
-  handleChange: (event: React.FormEvent<HTMLFormElement>) => void;
-  fetchUsername: (event: React.FormEvent<HTMLFormElement>) => void;
-}
-
-const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, loginData, setLoginData, handleChange, fetchUsername }) => (
-  <div>
-
-    <form onSubmit={fetchUsername}>
-     <label>
-        Username:  {loginData.username}
-      </label>
-      </form>
-<br></br>
-=======
 interface Props {
   competencyData: CompetencyData;
   loginData: LoginData; // Added loginData prop
@@ -32,10 +11,9 @@ interface Props {
 const CompetenciesView: React.FC<Props> = ({ competencyData, loginData, setCompetencyData, handleChange }) => (
   <div>
     <label>
-      Username: {loginData} {/* Display the username from loginData */}
+      Username: {competencyData.requestedUsername} {/* Display the username from loginData */}
     </label>
 
->>>>>>> main
     <form onSubmit={handleChange}>
       <label>
         Competency name:
@@ -46,11 +24,7 @@ const CompetenciesView: React.FC<Props> = ({ competencyData, loginData, setCompe
           onChange={(e) => setCompetencyData({ ...competencyData, competencyName: e.target.value })}
         />
       </label>
-<<<<<<< HEAD
-      <br></br>
-=======
-
->>>>>>> main
+<br></br>
       <label>
         Years of experience:
         <input
@@ -60,19 +34,11 @@ const CompetenciesView: React.FC<Props> = ({ competencyData, loginData, setCompe
           onChange={(e) => setCompetencyData({ ...competencyData, yearsOfExperience: e.target.value })}
         />
       </label>
-<<<<<<< HEAD
 <br></br>
-=======
-
->>>>>>> main
       <button
         style={{ backgroundColor: 'lightgrey', color: 'black', borderRadius: '6px' }}
         type="submit"
       >
-<<<<<<< HEAD
-        
-=======
->>>>>>> main
         ADD
       </button>
     </form>
