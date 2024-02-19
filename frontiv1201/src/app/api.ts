@@ -28,6 +28,7 @@ interface LoginResponse {
 }
 
 
+
 export interface CompetencyData {
   // Properties of the competency data 
   competencyName: string;
@@ -38,6 +39,19 @@ export interface CompetencyData {
 interface AddCompetencyResponse {
   message: string;
   
+}
+
+export const getApplicants = async (token: string): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axios.get(`${BASE_URL}/getApplicants`, {
+      headers: { token: `${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch applicants', error);
+    throw error;
+  }
+
 }
 
 export const registerPerson = async (registerData: RegisterData): Promise<RegisterResponse> => {
@@ -52,7 +66,12 @@ export const registerPerson = async (registerData: RegisterData): Promise<Regist
 
 export const loginPerson = async (loginData: LoginData): Promise<LoginResponse> => {
   try {
+
     const response: AxiosResponse<LoginResponse> = await axios.post(`${BASE_URL}/login`, loginData);
+
+      const response: AxiosResponse<LoginResponse> = await axios.post(`${BASE_URL}/login`, loginData);
+      console.log('response:', response);
+
     return response.data;
   } catch (error) {
     console.error('Error during login:', error);
