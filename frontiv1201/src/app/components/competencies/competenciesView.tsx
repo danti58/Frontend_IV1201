@@ -1,6 +1,7 @@
 import React from 'react';
 import { CompetencyData, LoginData } from '@/app/api';
 
+<<<<<<< HEAD
 
 interface Props {
   competencyData: CompetencyData;
@@ -20,6 +21,21 @@ const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, 
       </label>
       </form>
 <br></br>
+=======
+interface Props {
+  competencyData: CompetencyData;
+  loginData: LoginData; // Added loginData prop
+  setCompetencyData: (competencyData: CompetencyData) => void;
+  handleChange: (event: React.FormEvent<HTMLFormElement>) => void;
+}
+
+const CompetenciesView: React.FC<Props> = ({ competencyData, loginData, setCompetencyData, handleChange }) => (
+  <div>
+    <label>
+      Username: {loginData} {/* Display the username from loginData */}
+    </label>
+
+>>>>>>> main
     <form onSubmit={handleChange}>
       <label>
         Competency name:
@@ -30,7 +46,11 @@ const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, 
           onChange={(e) => setCompetencyData({ ...competencyData, competencyName: e.target.value })}
         />
       </label>
+<<<<<<< HEAD
       <br></br>
+=======
+
+>>>>>>> main
       <label>
         Years of experience:
         <input
@@ -40,12 +60,19 @@ const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, 
           onChange={(e) => setCompetencyData({ ...competencyData, yearsOfExperience: e.target.value })}
         />
       </label>
+<<<<<<< HEAD
 <br></br>
+=======
+
+>>>>>>> main
       <button
         style={{ backgroundColor: 'lightgrey', color: 'black', borderRadius: '6px' }}
         type="submit"
       >
+<<<<<<< HEAD
         
+=======
+>>>>>>> main
         ADD
       </button>
     </form>
