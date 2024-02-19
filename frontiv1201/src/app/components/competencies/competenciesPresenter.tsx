@@ -19,7 +19,7 @@ const userState = useSelector((state: any) => state.auth.userState);
   });
 
 
-
+const [successMessage, setSuccessMessage] = React.useState<string>('');
   
 
 
@@ -53,7 +53,8 @@ const userState = useSelector((state: any) => state.auth.userState);
 
 
 
-  return <CompetenciesView competencyData={competencyData} setCompetencyData={setCompetencyData}  handleChange={handleChange}  />;
+  return <CompetenciesView competencyData={competencyData} setCompetencyData={setCompetencyData}  handleChange={handleChange} 
+  successMessage={successMessage} setSuccessMessage={setSuccessMessage}  />;
 };
 
 export default CompetenciesPresenter;
