@@ -6,7 +6,7 @@ import { Reducer } from '@reduxjs/toolkit';
 import { AuthState } from './types';
 
 const authReducer: Reducer<AuthState, any> = (
-	state = { userState: { token: null, role_id: null, username: null } },
+	state = { userState: { token: null, role_id: 0, username: null } },
 	action: any
   ) => {
 	switch (action.type) {
