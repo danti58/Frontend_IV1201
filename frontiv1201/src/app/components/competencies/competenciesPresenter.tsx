@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { addCompetency, CompetencyData, loginPerson, LoginData } from '@/app/api';
+import { addCompetency, CompetencyData } from '@/app/api';
 import CompetenciesView from './competenciesView';
 
 function CompetenciesPresenter() {
@@ -12,11 +12,23 @@ const userState = useSelector((state: any) => state.auth.userState);
  const [competencyData, setCompetencyData] = React.useState<CompetencyData>({
   requestedUsername: userState.username,  
   competencyName: '', 
-  yearsOfExperience: 0,
+  yearsOfExperience: '',
+    
+    
+ 
   });
+
+
+
+ 
+
+const [successMessage, setSuccessMessage] = React.useState<string>('');
+  
+
 
   function onAddCompetencySuccess(response: any) {
     // print response json:
+    setSuccessMessage('Competency successfully added!');
     console.log('Add competence success:', response);
   }
 
@@ -24,14 +36,6 @@ const userState = useSelector((state: any) => state.auth.userState);
         console.error('Add competence failed:', error);
     }
 
-      function onLoginSuccess(response: any) {
-    // print response json:
-    console.log('Login success:', response);
-  }
-
-    function onLoginFail(error: any) {
-        console.error('Login failed:', error);
-    }
 
 
   
@@ -52,7 +56,11 @@ const userState = useSelector((state: any) => state.auth.userState);
 
 
 
-  return <CompetenciesView competencyData={competencyData} setCompetencyData={setCompetencyData} handleChange={handleChange}  />;
+
+
+
+  return <CompetenciesView competencyData={competencyData} setCompetencyData={setCompetencyData}  handleChange={handleChange} 
+  successMessage={successMessage} setSuccessMessage={setSuccessMessage}  />;
 };
 
 export default CompetenciesPresenter;

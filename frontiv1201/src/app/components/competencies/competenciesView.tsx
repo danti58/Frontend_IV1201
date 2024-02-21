@@ -5,12 +5,16 @@ interface Props {
   competencyData: CompetencyData;
   setCompetencyData: (competencyData: CompetencyData) => void;
   handleChange: (event: React.FormEvent<HTMLFormElement>) => void;
+  successMessage: string;
 }
 
+
 const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, handleChange }) => (
+
   <div>
+     {successMessage && <p>{successMessage}</p>}
     <label>
-      Username: {competencyData.requestedUsername} {/* Display the username from loginData */}
+      Username: {competencyData.Username} {/* Display the username from loginData */}
     </label>
 
     <form onSubmit={handleChange}>
