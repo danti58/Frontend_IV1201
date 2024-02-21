@@ -33,6 +33,40 @@ function AdminApplicantsView({ applicants }: Props) {
     }
   };
 
+  function renderCompetencies(competencies: any) {
+    console.log(competencies);
+    let result = '';
+    result += competencies.competency_name;
+    result += ' ';
+    result += Math.round(competencies.years_of_experience) + ' years';
+    return <p style={{ color: 'red' }}>{result}</p>;
+  }
+
+  function mapApplicants(applicant: User) {
+    return (
+      <div key={applicant.person_id}>
+        <div onClick={() => toggleApplicantDetails(applicant.person_id)}>
+          <p>{applicant.name} {applicant.surname}</p>
+        </div>
+        {expandedApplicantId === applicant.person_id && (
+          <div style={{ border: '1px solid red', padding: '1rem' }}>
+            {/* Expanded applicant details */}
+            <p>Email: {applicant.email}</p>
+            <p>PNR: {applicant.pnr}</p>
+            <p>Username: {applicant.username}</p>
+            {/* if competencies are not null */}
+            {applicant.competencies ? (
+              <p>Competencies: {applicant.competencies.map(renderCompetencies)}</p>
+            ) : (
+              <p>No competencies</p>
+            )}
+            {/* Include other details you want to show */}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   const toggleApplicantDetails = (id: number) => {
     if (expandedApplicantId === id) {
       // If clicking on the same applicant, collapse it
@@ -48,28 +82,7 @@ function AdminApplicantsView({ applicants }: Props) {
         <button onClick={() => handleSortChange('name')} >[Sort by first name] </button>
         <button onClick={() => handleSortChange('surname')}>[Sort by surname]</button>
        
-        {sortedApplicants.map((applicant) => (
-        <div key={applicant.person_id}>
-          <div onClick={() => toggleApplicantDetails(applicant.person_id)}>
-            <p>{applicant.name} {applicant.surname}</p>
-          </div>
-          {expandedApplicantId === applicant.person_id && (
-            <div style={{ border: '1px solid red', padding: '1rem' }}>
-              {/* Expanded applicant details */}
-              <p>Email: {applicant.email}</p>
-              <p>PNR: {applicant.pnr}</p>
-              <p>Username: {applicant.username}</p>
-              {/* if competencies are not null */}
-              {applicant.competencies ? (
-                <p>Competencies: {applicant.competencies.join(', ')}</p>
-              ) : (
-                <p>No competencies</p>
-              )}
-              {/* Include other details you want to show */}
-            </div>
-          )}
-        </div>
-      ))}
+        {sortedApplicants.map(mapApplicants)}
     </div>
   );
 };
