@@ -12,7 +12,7 @@ const userState = useSelector((state: any) => state.auth.userState);
  const [competencyData, setCompetencyData] = React.useState<CompetencyData>({
   requestedUsername: userState.username,  
   competencyName: '', 
-  yearsOfExperience: '',
+  yearsOfExperience: 0,
     
     
  

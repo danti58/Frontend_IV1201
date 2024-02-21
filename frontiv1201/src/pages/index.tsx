@@ -8,22 +8,12 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-10">
       <h1 className="text-4xl font-semibold mb-4 text-center">
-        Welcome to the recruitment app!
+        Recruitment app Group 7
       </h1>
 
       <p className="text-lg text-center">
         {userState.username ? `Welcome, ${userState.username}` : 'To access this app, please login or register.'}
       </p>
-
-
-      {/* Use Link without <a> */}
-      <Link href="/login" className="bg-blue-500 text-white px-4 py-2 rounded">Log in</Link>
-
-      <Link href="/competencies" className="bg-blue-500 text-white px-4 py-2 rounded">Competencies</Link>
-
-      <span className="mt-4">Don't have an account? 
-        <Link href="/register" className="text-blue-500">Register here</Link>
-      </span>
 
       {!userState.username && (
         <Link href="/register">
