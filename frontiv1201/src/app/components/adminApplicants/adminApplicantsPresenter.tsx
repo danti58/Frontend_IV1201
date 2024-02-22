@@ -17,6 +17,9 @@ function AdminApplicantsPresenter() {
     }
   }, [userState]);
 
+  /**
+   * Fetches applicants from the API
+   */
   const fetchApplicants = async () => {
     try {
       console.log('fetching applicants using token: ' + userState.token)

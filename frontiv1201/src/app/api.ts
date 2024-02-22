@@ -42,6 +42,12 @@ interface AddCompetencyResponse {
   
 }
 
+/**
+ * Fetches the applicants from the backend
+ * 
+ * @param token
+ * @returns
+ */
 export const getApplicants = async (token: string): Promise<any> => {
   try {
     const response: AxiosResponse<any> = await axios.get(`${BASE_URL}/getApplicants`, {
@@ -55,6 +61,12 @@ export const getApplicants = async (token: string): Promise<any> => {
 
 }
 
+/**
+ * Sends information for registering a user to the backend
+ * 
+ * @param registerData - Data with user information
+ * @returns
+ */
 export const registerPerson = async (registerData: RegisterData): Promise<RegisterResponse> => {
   try {
     const response: AxiosResponse<RegisterResponse> = await axios.post(`${BASE_URL}/register`, registerData);
@@ -65,6 +77,12 @@ export const registerPerson = async (registerData: RegisterData): Promise<Regist
   }
 };
 
+/**
+ * Checks login data with backend to see if it's a valid login
+ * 
+ * @param loginData - Data for login
+ * @returns
+ */
 export const loginPerson = async (loginData: LoginData): Promise<LoginResponse> => {
   try {
 

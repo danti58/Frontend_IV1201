@@ -5,6 +5,13 @@ import { SET_AUTH_DATA } from './actions';
 import { Reducer } from '@reduxjs/toolkit';
 import { AuthState } from './types';
 
+/**
+ * Auth reducer
+ * 
+ * @param state - Information to be sent to store
+ * @param action - Information about the user
+ * @returns
+ */
 const authReducer: Reducer<AuthState, any> = (
 	state = { userState: { token: null, role_id: 0, username: null } },
 	action: any

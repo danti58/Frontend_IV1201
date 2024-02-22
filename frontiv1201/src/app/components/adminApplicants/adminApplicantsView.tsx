@@ -24,6 +24,11 @@ function AdminApplicantsView({ applicants }: Props) {
     return 0;
   });
 
+  /**
+   * Handles the sort change
+   * 
+   * @param key - Requested sort
+   */
   const handleSortChange = (key: SortKey) => {
     if (sortKey === key) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -33,6 +38,12 @@ function AdminApplicantsView({ applicants }: Props) {
     }
   };
 
+  /**
+   * Displays the competencies
+   * 
+   * @param competencies - Retrived competencies
+   * @returns 
+   */
   function renderCompetencies(competencies: any) {
     console.log(competencies);
     let result = '';
@@ -42,6 +53,12 @@ function AdminApplicantsView({ applicants }: Props) {
     return <p style={{ color: 'red' }}>{result}</p>;
   }
 
+  /**
+   * Displays the applicants
+   * 
+   * @param applicant - The applicant being displayed
+   * @returns
+   */
   function mapApplicants(applicant: User) {
     return (
       <div key={applicant.person_id}>
@@ -67,6 +84,11 @@ function AdminApplicantsView({ applicants }: Props) {
     );
   }
 
+  /**
+   * Toggles the expanded state of the applicant
+   * 
+   * @param id 
+   */
   const toggleApplicantDetails = (id: number) => {
     if (expandedApplicantId === id) {
       // If clicking on the same applicant, collapse it

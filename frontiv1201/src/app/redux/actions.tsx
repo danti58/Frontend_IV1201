@@ -8,6 +8,12 @@ export interface SetAuthDataPayload {
   username: string;
 }
 
+/**
+ * Action to set the auth data
+ * 
+ * @param payload
+ * @returns
+ */
 export const setAuthData = (payload: SetAuthDataPayload) => ({
   type: SET_AUTH_DATA,
   payload,

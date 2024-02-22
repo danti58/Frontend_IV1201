@@ -18,6 +18,11 @@ function LoginPresenter() {
     password: '',
   });
 
+  /**
+   * Redirects the user to the home page after successful login
+   * 
+   * @param response - Response from backend
+   */
   function onLoginSuccess(response: any) {
     // print response json:
     console.log('Login success:', response);
@@ -30,9 +35,21 @@ function LoginPresenter() {
     }
   }
 
+
+  /**
+   * Shows a error message when the login fails
+   * 
+   * @param error - Error message
+   */
   function onLoginFail(error: any) {
     console.error('Login failed:', error);
-  }
+    }
+
+    /**
+     * Handles the login data from the API call
+     * 
+     * @param event - Form submission event
+     */
 
   // Inside LoginPresenter component
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -46,6 +63,11 @@ function LoginPresenter() {
     }
   };
 
+  /**
+   * Sends the user information to the Redux store
+   * 
+   * @param responseData - Data from the API call
+   */
   const handleApiData = (responseData: any) => {
     const token = responseData.token;
     const username = responseData.user.username;
