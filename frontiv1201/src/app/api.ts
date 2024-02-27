@@ -42,6 +42,19 @@ interface AddCompetencyResponse {
   
 }
 
+export interface AvailabilityData {
+  // Properties of the competency data 
+  from_date: string;
+  to_date: string;
+  
+  
+}
+
+interface AvailabilityResponse {
+  message: string;
+  
+}
+
 export const getApplicants = async (token: string): Promise<any> => {
   try {
     const response: AxiosResponse<any> = await axios.get(`${BASE_URL}/getApplicants`, {
