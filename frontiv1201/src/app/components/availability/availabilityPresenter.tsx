@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AvailabilityView from './availabilityView';
-import { AvailabilityData } from '@/app/api';
+import { AvailabilityData, addAvailability } from '@/app/api';
 import { useSelector } from 'react-redux';
 
 
@@ -10,9 +10,9 @@ function AvailabilityPresenter() {
 const userState = useSelector((state: any) => state.auth.userState);
 
  const [availabilityData, setAvailabilityData] = React.useState<AvailabilityData>({
-  
-  from_date: '', 
-  to_date: '' ,
+  requestedUsername: userState.username, 
+  fromDate: '', 
+  toDate: '' ,
     
     
  

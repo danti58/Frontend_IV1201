@@ -11,45 +11,94 @@ interface Props {
   setSuccessMessage: (successMessage: string) => void;
 }
 
+const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage }) => {
 
-const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage }) => (
+  const styles = `
+    .availability-view-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
 
-  <div>
-     {successMessage && <p>{successMessage}</p>}
-  
+    .success-message {
+      color: green;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
 
-    <form onSubmit={handleDateSelect}>
-      <label>
-        From date:
-        <input
-          className="bg-white text-black"
-          type="text"
-          value={availabilityData.from_date}
-          onChange={(e) => setAvailabilityData({ ...availabilityData, from_date: e.target.value })}
-        />
-      </label>
-<br></br>
-      <label>
-        to date:
-        <input
-          className="bg-white text-black"
-          type="text"
-          value={availabilityData.to_date}
-          onChange={(e) => setAvailabilityData({ ...availabilityData, to_date: e.target.value })}
-        />
-      </label>
-<br></br>
-      <button
-        style={{ backgroundColor: 'lightgrey', color: 'black', borderRadius: '6px' }}
-        type="submit"
-      >
-        ADD
-      </button>
-    </form>
-  </div>
-);
+    .username {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
 
+    .date-picker-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
 
+    .date-label {
+      display: block;
+      margin-bottom: 10px;
+    }
 
+    .date-picker {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .add-button {
+      background-color: lightgrey;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .add-button:hover {
+      background-color: #ccc;
+    }
+  `;
+
+  return (
+    <div>
+      <style>{styles}</style>
+      <div className="availability-view-container">
+        {successMessage && <p className="success-message">{successMessage}</p>}
+        <div className="username">Username: {availabilityData.requestedUsername}</div>
+        <form onSubmit={handleDateSelect}>
+          <div className="date-picker-container">
+            <label className="date-label">
+              From date:
+              <DatePicker
+                selected={availabilityData.fromDate}
+                onChange={(e) => setAvailabilityData({ ...availabilityData, fromDate: e })}
+                className="date-picker"
+                dateFormat="yyyy-MM-dd"
+              />
+            </label>
+            <label className="date-label">
+              To date:
+              <DatePicker
+                selected={availabilityData.toDate}
+                onChange={(e) => setAvailabilityData({ ...availabilityData, toDate: e })}
+                className="date-picker"
+                dateFormat="yyyy-MM-dd"
+              />
+            </label>
+          </div>
+          <button className="add-button" type="submit">
+            ADD
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 export default AvailabilityView;
