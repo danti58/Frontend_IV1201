@@ -4,11 +4,21 @@ import { useSelector } from 'react-redux';
 import { addCompetency, CompetencyData } from '@/app/api';
 import CompetenciesView from './competenciesView';
 
+/**
+ * Presenter component for the competencies page, handles the add competency logic and passes the data to the view component.
+ * 
+ * @returns - Competencies view component
+ */
 function CompetenciesPresenter() {
 
-
+/**
+ * Fetches the user state from the Redux store
+ */
 const userState = useSelector((state: any) => state.auth.userState);
 
+/**
+ * State to store the competency data from the form inputs.
+ */
  const [competencyData, setCompetencyData] = React.useState<CompetencyData>({
   requestedUsername: userState.username,  
   competencyName: '', 
@@ -21,14 +31,16 @@ const userState = useSelector((state: any) => state.auth.userState);
 
 
  
-
+/**
+ * State to store the success message after adding a competency to the database.
+ */
 const [successMessage, setSuccessMessage] = React.useState<string>('');
   
 
   /**
-   * Sends a success message when the competency is added
+   * Sends a success message when the competency is added to the database.
    * 
-   * @param response - Response from API
+   * @param response - Response from the API call after successful add competency
    */
   function onAddCompetencySuccess(response: any) {
     // print response json:
@@ -37,7 +49,7 @@ const [successMessage, setSuccessMessage] = React.useState<string>('');
   }
 
   /**
-   * Sends a error message when addCompetency fails
+   * Shows a error message when the add competency fails and logs the error to the console.
    * 
    * @param error - Error message
    */

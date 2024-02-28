@@ -8,12 +8,21 @@ type Props = {
   applicants: Array<User>;
 };
 
+/**
+ * View component for the admin applicants page, displays the applicants and handles the sorting logic.
+ * 
+ * @param applicants - The applicants to display
+ * @returns - Admin applicants view component
+ */
 function AdminApplicantsView({ applicants }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('name');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [expandedApplicantId, setExpandedApplicantId] = useState<number | null>(null);
 
 
+  /**
+   * Sorts the applicants based on the current sort key and order.
+   */
   const sortedApplicants = [...applicants].sort((a, b) => {
     const valueA = a[sortKey];
     const valueB = b[sortKey];
@@ -25,9 +34,9 @@ function AdminApplicantsView({ applicants }: Props) {
   });
 
   /**
-   * Handles the sort change
+   * Handles the sort change event and updates the sort key and order.
    * 
-   * @param key - Requested sort
+   * @param key - Requested sort key
    */
   const handleSortChange = (key: SortKey) => {
     if (sortKey === key) {
@@ -39,10 +48,10 @@ function AdminApplicantsView({ applicants }: Props) {
   };
 
   /**
-   * Displays the competencies
+   * Displays the competencies of the applicant.
    * 
-   * @param competencies - Retrived competencies
-   * @returns 
+   * @param competencies - Retrived competencies from the API
+   * @returns - The competencies of the applicant
    */
   function renderCompetencies(competencies: any) {
     console.log(competencies);
@@ -54,10 +63,10 @@ function AdminApplicantsView({ applicants }: Props) {
   }
 
   /**
-   * Displays the applicants
+   * Displays the applicants and their details.
    * 
-   * @param applicant - The applicant being displayed
-   * @returns
+   * @param applicant - The applicant to display
+   * @returns - The applicant details
    */
   function mapApplicants(applicant: User) {
     return (
@@ -85,9 +94,9 @@ function AdminApplicantsView({ applicants }: Props) {
   }
 
   /**
-   * Toggles the expanded state of the applicant
+   * Toggles the expanded state of the applicant details.
    * 
-   * @param id 
+   * @param id - The ID of the applicant to toggle the details for
    */
   const toggleApplicantDetails = (id: number) => {
     if (expandedApplicantId === id) {

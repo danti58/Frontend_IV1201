@@ -13,6 +13,11 @@ interface RegisterData {
   username: string;
 }
 
+/**
+ * Presenter component for the register page, handles the register logic and passes the data to the view component.
+ * 
+ * @returns  - Register view component
+ */
 function RegisterPresenter () {
   const router = useRouter();
   const [registerData, setRegisterData] = React.useState<RegisterData>({
@@ -26,7 +31,7 @@ function RegisterPresenter () {
   });
 
   /**
-   * Redirects the user to the login page after successful registration
+   * Redirects the user to the login page after successful registration.
    * 
    * @param response - Response from API
    */
@@ -36,7 +41,7 @@ function RegisterPresenter () {
   }
 
   /**
-   * Sends error message when register fails
+   * Sends error message when register fails  and logs the error to the console.
    * 
    * @param error - Error message
    */
@@ -45,7 +50,7 @@ function RegisterPresenter () {
   }
 
   /**
-   * Handles response from API call
+   * Handles response from API call after successful registration.
    */
   const handleRegister = async () => {
     try {

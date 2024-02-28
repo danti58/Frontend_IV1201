@@ -10,6 +10,14 @@ type NavbarViewProps = {
   onLogoutClick: () => void;
 };
 
+/**
+ * View component for the Navbar, displays the Navbar and handles the login and logout logic.
+ * 
+ * @param loginDisplay - The text to display when the user is logged in
+ * @param onLoginClick - The function to call when the login button is clicked
+ * @param onLogoutClick - The function to call when the logout button is clicked
+ * @returns - Navbar view component
+ */
 const NavbarView: React.FC<NavbarViewProps> = ({ loginDisplay, onLoginClick, onLogoutClick }) => {
   const { role_id } = useSelector((state: any) => state.auth.userState as UserState);
 

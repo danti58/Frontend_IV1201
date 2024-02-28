@@ -5,6 +5,11 @@ import styles from '../styles/Home.module.css';
 
 // Import your LoginComponent here
 
+/**
+ * Page component for the login page.
+ * 
+ * @returns - Login presenter component
+ */
 export default function Login() {
   return (
     <div>

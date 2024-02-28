@@ -9,7 +9,12 @@ interface Props {
   setSuccessMessage: (successMessage: string) => void;
 }
 
-
+/**
+ * Competencies view component
+ * 
+ * @param param0  - The props of the component
+ * @returns - Competencies view component
+ */
 const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, handleChange, successMessage }) => (
 
   <div>

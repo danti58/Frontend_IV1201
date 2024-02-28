@@ -4,7 +4,12 @@ import { useSelector } from 'react-redux';
 import AdminApplicantsView from './adminApplicantsView';
 import { getApplicants } from '@/app/api';
 
-
+/**
+ * Presenter component for the admin applicants page, 
+ * fetches applicants from the API and passes them to the view component.
+ * 
+ * @returns - Admin aplicants view component
+ */
 function AdminApplicantsPresenter() {
   const userState = useSelector((state: any) => state.auth.userState);
   const [applicants, setApplicants] = useState([]);
@@ -18,7 +23,7 @@ function AdminApplicantsPresenter() {
   }, [userState]);
 
   /**
-   * Fetches applicants from the API
+   * Fetches applicants from the API  and sets the state with the response data.
    */
   const fetchApplicants = async () => {
     try {
