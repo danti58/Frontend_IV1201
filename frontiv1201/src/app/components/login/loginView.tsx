@@ -7,6 +7,12 @@ interface Props {
   handleLogin: (event: React.FormEvent<HTMLFormElement>) => void; // Updated to handle form event
 }
 
+/**
+ * Login view component 
+ * 
+ * @param param0  - Login view component props
+ * @returns - Login view component
+ */
 const LoginView: React.FC<Props> = ({ loginData, setLoginData, handleLogin }) => (
   <div>
     {/* Wrap inputs with a form tag and use onSubmit event */}
