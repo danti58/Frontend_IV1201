@@ -8,12 +8,21 @@ type Props = {
   applicants: Array<User>;
 };
 
+/**
+ * View component for the admin applicants page, displays the applicants and handles the sorting logic.
+ * 
+ * @param applicants - The applicants to display
+ * @returns - Admin applicants view component
+ */
 function AdminApplicantsView({ applicants }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('name');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [expandedApplicantId, setExpandedApplicantId] = useState<number | null>(null);
 
 
+  /**
+   * Sorts the applicants based on the current sort key and order.
+   */
   const sortedApplicants = [...applicants].sort((a, b) => {
     const valueA = a[sortKey];
     const valueB = b[sortKey];
@@ -24,6 +33,11 @@ function AdminApplicantsView({ applicants }: Props) {
     return 0;
   });
 
+  /**
+   * Handles the sort change event and updates the sort key and order.
+   * 
+   * @param key - Requested sort key
+   */
   const handleSortChange = (key: SortKey) => {
     if (sortKey === key) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -33,6 +47,12 @@ function AdminApplicantsView({ applicants }: Props) {
     }
   };
 
+  /**
+   * Displays the competencies of the applicant.
+   * 
+   * @param competencies - Retrived competencies from the API
+   * @returns - The competencies of the applicant
+   */
   function renderCompetencies(competencies: any) {
     console.log(competencies);
     let result = '';
@@ -42,6 +62,12 @@ function AdminApplicantsView({ applicants }: Props) {
     return <p style={{ color: 'red' }}>{result}</p>;
   }
 
+  /**
+   * Displays the applicants and their details.
+   * 
+   * @param applicant - The applicant to display
+   * @returns - The applicant details
+   */
   function mapApplicants(applicant: User) {
     return (
       <div key={applicant.person_id}>
@@ -67,6 +93,11 @@ function AdminApplicantsView({ applicants }: Props) {
     );
   }
 
+  /**
+   * Toggles the expanded state of the applicant details.
+   * 
+   * @param id - The ID of the applicant to toggle the details for
+   */
   const toggleApplicantDetails = (id: number) => {
     if (expandedApplicantId === id) {
       // If clicking on the same applicant, collapse it

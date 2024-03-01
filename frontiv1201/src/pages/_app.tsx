@@ -6,6 +6,13 @@ import store from '@/app/redux/store';
 import NavbarPresenter from '@/app/components/navbar/navbarPresenter';
 
 
+/**
+ * Main app component that wraps the entire application.
+ * 
+ * @param Component - The page component
+ * @param pageProps - The props for the page component
+ * @returns - The page component wrapped in the Redux store provider
+ */
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider store={store}>
