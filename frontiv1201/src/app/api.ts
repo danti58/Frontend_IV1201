@@ -46,8 +46,8 @@ interface AddCompetencyResponse {
 export interface AvailabilityData {
   // Properties of the availability data 
   requestedUsername: string;
-  fromDate: string;
-  toDate: string;
+  fromDate: Date;
+  toDate: Date;
   
   
 }

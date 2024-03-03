@@ -76,8 +76,8 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
             <label className="date-label">
               From date:
               <DatePicker
-                selected={availabilityData.fromDate}
-                onChange={(e) => setAvailabilityData({ ...availabilityData, fromDate: e })}
+                selected={new Date(availabilityData.fromDate)}
+                onChange={(e) => setAvailabilityData({ ...availabilityData, fromDate: e? new Date(e) : new Date('')})}
                 className="date-picker"
                 dateFormat="yyyy-MM-dd"
               />
@@ -85,8 +85,8 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
             <label className="date-label">
               To date:
               <DatePicker
-                selected={availabilityData.toDate}
-                onChange={(e) => setAvailabilityData({ ...availabilityData, toDate: e })}
+                selected={new Date(availabilityData.toDate)}
+                onChange={(e) => setAvailabilityData({ ...availabilityData, toDate:  e? new Date(e) : new Date('')})}
                 className="date-picker"
                 dateFormat="yyyy-MM-dd"
               />

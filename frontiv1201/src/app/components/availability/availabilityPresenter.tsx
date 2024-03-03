@@ -11,8 +11,8 @@ const userState = useSelector((state: any) => state.auth.userState);
 
  const [availabilityData, setAvailabilityData] = React.useState<AvailabilityData>({
   requestedUsername: userState.username, 
-  fromDate: '', 
-  toDate: '' ,
+  fromDate: new Date(), 
+  toDate: new Date() ,
     
     
  
