@@ -22,30 +22,46 @@ const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, 
     <label>
       Username: {competencyData.requestedUsername} {/* Display the username from loginData */}
     </label>
-
     <form onSubmit={handleChange}>
-      <label>
-        Competency name:
-        <input
+      <div style={{ marginBottom: '20px' }}>
+        <label style={{ display: 'block', marginBottom: '5px' }}>Competency name:</label>
+        <select
           className="bg-white text-black"
-          type="text"
           value={competencyData.competencyName}
-          onChange={(e) => setCompetencyData({ ...competencyData, competencyName: e.target.value })}
-        />
-      </label>
-<br></br>
-      <label>
-        Years of experience:
+          onChange={(e) =>
+            setCompetencyData({ ...competencyData, competencyName: e.target.value })
+          }
+          style={{ padding: '8px', borderRadius: '4px', width: '100%' }}
+        >
+          <option value="ticket sales">Ticket sales</option>
+          <option value="lotteries">Lotteries</option>
+          <option value="roller coaster operation">Roller coaster operation</option>
+        </select>
+      </div>
+      <div style={{ marginBottom: '20px' }}>
+        <label style={{ display: 'block', marginBottom: '5px' }}>Years of experience:</label>
         <input
           className="bg-white text-black"
           type="text"
           value={competencyData.yearsOfExperience}
-          onChange={(e) => setCompetencyData({ ...competencyData, yearsOfExperience: parseInt(e.target.value) })}
+          onChange={(e) =>
+            setCompetencyData({
+              ...competencyData,
+              yearsOfExperience: parseInt(e.target.value) || 0,
+            })
+          }
+          style={{ padding: '8px', borderRadius: '4px', width: '100%' }}
         />
-      </label>
-<br></br>
+      </div>
       <button
-        style={{ backgroundColor: 'lightgrey', color: 'black', borderRadius: '6px' }}
+        style={{
+          backgroundColor: '#4CAF50',
+          color: 'white',
+          padding: '10px 20px',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+        }}
         type="submit"
       >
         ADD
