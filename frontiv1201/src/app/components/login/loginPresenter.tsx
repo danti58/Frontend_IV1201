@@ -1,7 +1,7 @@
 // loginPresenter.tsx
 
 import React from 'react';
-import { loginPerson, LoginData } from '@/app/api';
+import { loginPerson, LoginData, requestPasswordResetLink } from '@/app/api';
 import LoginView from './loginView';
 import { setAuthData } from '@/app/redux/actions';
 import { useDispatch, useSelector } from 'react-redux';

@@ -41,6 +41,10 @@ const LoginView: React.FC<Props> = ({ loginData, setLoginData, handleLogin }) =>
       >
         Login
       </button>
+
+      <button>
+        <a href="/passwordResetLinkRequestPage">[Forgot Password]</a>
+      </button>
     </form>
   </div>
 );

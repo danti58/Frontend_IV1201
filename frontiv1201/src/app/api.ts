@@ -115,7 +115,49 @@ export const loginPerson = async (loginData: LoginData): Promise<LoginResponse> 
   }
 };
 
-// Define the function to add competency
+/** 
+ * Requests a password reset token
+ * 
+ * @param token
+ * @returns
+ */
+export const requestPasswordResetLink = async (email: string): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axios.get(`${BASE_URL}/requestPasswordResetLink`, {
+      headers: { email: email }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to request password reset link', error);
+    throw error;
+  }
+};
+
+/**
+ * resets the password to a new one
+ * 
+ * @param token
+ * @param newPassword
+ * @returns
+ */
+export const resetPassword = async (token: string, newPassword: string): Promise<any> => {
+  try {
+    const response: AxiosResponse<any> = await axios.post(`${BASE_URL}/resetPassword`, {
+      token:token, newPassword:newPassword
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to reset password', error);
+    throw error;
+  }
+};
+
+/**
+ * Adds a competency to a person
+ * 
+ * @param token
+ * @returns
+ */
 export const addCompetency = async (competencyData: CompetencyData, token: string): Promise<AddCompetencyResponse> => {
   try {
     const response: AxiosResponse<AddCompetencyResponse> = await axios.post(`${BASE_URL}/addCompetencyToPerson`, competencyData , {
