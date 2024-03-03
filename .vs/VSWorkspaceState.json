@@ -1,9 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\frontiv1201",
-    "\\frontiv1201\\src",
-    "\\frontiv1201\\src\\app"
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components",
+    "\\src\\app\\components\\adminApplicants",
+    "\\src\\app\\components\\competencies",
+    "\\src\\app\\components\\navbar",
+    "\\src\\app\\components\\register",
+    "\\src\\app\\redux",
+    "\\src\\pages"
   ],
+  "SelectedNode": "\\src\\app\\api.ts",
   "PreviewInSolutionExplorer": false
 }
