@@ -42,12 +42,29 @@ interface AddCompetencyResponse {
   
 }
 
+
+export interface AvailabilityData {
+  // Properties of the availability data 
+  requestedUsername: string;
+  fromDate: string;
+  toDate: string;
+  
+  
+}
+
+interface AvailabilityResponse {
+  message: string;
+  
+}
+
+
 /**
  * Fetches the applicants from the backend
  * 
  * @param token
  * @returns
  */
+
 export const getApplicants = async (token: string): Promise<any> => {
   try {
     const response: AxiosResponse<any> = await axios.get(`${BASE_URL}/getApplicants`, {
@@ -113,3 +130,16 @@ export const addCompetency = async (competencyData: CompetencyData, token: strin
   }
 };
 
+export const addAvailability = async (availabilityData: AvailabilityData, token: string): Promise<AvailabilityResponse> => {
+  try {
+    const response: AxiosResponse<AvailabilityResponse> = await axios.post(`${BASE_URL}/addAvailability`, availabilityData , {
+      headers: { token: `${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error adding competence:', error);
+    console.log('data:', availabilityData)
+    console.log('token:', token)
+    throw error;
+  }
+};
