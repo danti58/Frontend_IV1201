@@ -10,6 +10,12 @@ interface Props {
   handleRegister: () => void;
 }
 
+/**
+ * Register view component
+ * 
+ * @param p - Register view component props
+ * @returns - Register view component
+ */
 const RegisterView: React.FC<Props> = ({ registerData, setRegisterData, handleRegister }) => (
   <div className="register-form">
     <Link href="/">Go Back</Link>

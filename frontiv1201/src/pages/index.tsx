@@ -2,7 +2,16 @@ import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import { useSelector } from 'react-redux';
 
+/**
+ * Home page component
+ * 
+ * @returns - Home page component
+ */
 export default function Home() {
+
+  /**
+   * Get the user state from the Redux store to check if the user is logged in.
+   */
   const userState = useSelector((state: any) => state.auth.userState);
 
   return (

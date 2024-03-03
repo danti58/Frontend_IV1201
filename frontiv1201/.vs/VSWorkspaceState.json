@@ -4,10 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\components",
-    "\\src\\app\\components\\login",
+    "\\src\\app\\components\\adminApplicants",
+    "\\src\\app\\components\\competencies",
+    "\\src\\app\\components\\navbar",
     "\\src\\app\\components\\register",
     "\\src\\app\\redux",
     "\\src\\pages"
   ],
+  "SelectedNode": "\\src\\app\\api.ts",
   "PreviewInSolutionExplorer": false
 }

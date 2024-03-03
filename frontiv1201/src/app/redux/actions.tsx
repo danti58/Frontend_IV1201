@@ -8,6 +8,12 @@ export interface SetAuthDataPayload {
   username: string;
 }
 
+/**
+ * Action to set the auth data in the Redux store.
+ * 
+ * @param payload - The auth data to set in the Redux store
+ * @returns - Action with the auth data payload
+ */
 export const setAuthData = (payload: SetAuthDataPayload) => ({
   type: SET_AUTH_DATA,
   payload,

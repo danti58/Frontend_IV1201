@@ -9,16 +9,18 @@ interface Props {
   setSuccessMessage: (successMessage: string) => void;
 }
 
-const CompetenciesView: React.FC<Props> = ({
-  competencyData,
-  setCompetencyData,
-  handleChange,
-  successMessage,
-}) => (
-  <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
-    {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-    <label style={{ display: 'block', marginBottom: '10px' }}>
-      Username: <strong>{competencyData.requestedUsername}</strong>
+/**
+ * Competencies view component
+ * 
+ * @param param0  - The props of the component
+ * @returns - Competencies view component
+ */
+const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, handleChange, successMessage }) => (
+
+  <div>
+     {successMessage && <p>{successMessage}</p>}
+    <label>
+      Username: {competencyData.requestedUsername} {/* Display the username from loginData */}
     </label>
     <form onSubmit={handleChange}>
       <div style={{ marginBottom: '20px' }}>
