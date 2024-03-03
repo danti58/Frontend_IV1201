@@ -71,7 +71,7 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
       <div className="availability-view-container">
         {successMessage && <p className="success-message">{successMessage}</p>}
         <div className="username">Username: {availabilityData.requestedUsername}</div>
-        <form onSubmit={handleDateSelect}>
+        <form className="bg-white text-black" onSubmit={handleDateSelect}>
           <div className="date-picker-container">
             <label className="date-label">
               From date:
