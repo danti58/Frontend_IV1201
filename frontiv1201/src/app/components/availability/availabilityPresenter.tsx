@@ -16,7 +16,10 @@ const userState = useSelector((state: any) => state.auth.userState);
     
     
  
-  });
+ });
+
+    const [fromDate, setFromDate] = useState(new Date());
+    const [toDate, setToDate] = useState(new Date());
 
 
 
@@ -33,6 +36,7 @@ const [successMessage, setSuccessMessage] = React.useState<string>('');
   }
 
     function onAddavailabilityFail(error: any) {
+        console.log(fromDate, toDate);
         console.error('Add availability failed:', error);
     }
 
@@ -59,8 +63,8 @@ const [successMessage, setSuccessMessage] = React.useState<string>('');
 
 
 
-  return <AvailabilityView availabilityData={availabilityData} setAvailabilityData={setAvailabilityData}  handleDateSelect={handleDateSelect} 
-  successMessage={successMessage} setSuccessMessage={setSuccessMessage}  />;
+    return <AvailabilityView availabilityData={availabilityData} setAvailabilityData={setAvailabilityData} handleDateSelect={handleDateSelect}
+        successMessage={successMessage} setSuccessMessage={setSuccessMessage} fromDate={fromDate} setFromDate={setFromDate} toDate={toDate} setToDate={setToDate} />;
 };
 
 export default AvailabilityPresenter;

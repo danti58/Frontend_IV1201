@@ -9,9 +9,13 @@ interface Props {
   handleDateSelect: (event: React.FormEvent<HTMLFormElement>) => void;
   successMessage: string;
   setSuccessMessage: (successMessage: string) => void;
+  fromDate: Date;
+  setFromDate: (fromDate: any) => void;
+  toDate: Date;
+  setToDate: (toDate: any) => void;
 }
 
-const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage }) => {
+const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage, fromDate, setFromDate, toDate, setToDate }) => {
 
   const styles = `
     .availability-view-container {
@@ -76,8 +80,9 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
             <label className="date-label">
               From date:
               <DatePicker
-                selected={availabilityData.fromDate}
-                onChange={(e) => setAvailabilityData({ ...availabilityData, fromDate: e })}
+                selected={fromDate}
+                //onChange={(e) => setAvailabilityData({ ...availabilityData, fromDate: e })}
+                onChange={(date) => setFromDate(date)}
                 className="date-picker"
                 dateFormat="yyyy-MM-dd"
               />
@@ -85,14 +90,15 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
             <label className="date-label">
               To date:
               <DatePicker
-                selected={availabilityData.toDate}
-                onChange={(e) => setAvailabilityData({ ...availabilityData, toDate: e })}
+                selected={toDate}
+                //onChange={(e) => setAvailabilityData({ ...availabilityData, toDate: e })}
+                onChange={(date) => setToDate(date)}
                 className="date-picker"
                 dateFormat="yyyy-MM-dd"
               />
             </label>
-          </div>
-          <button className="add-button" type="submit">
+                  </div>
+                  <button className="add-button" type="submit" >  
             ADD
           </button>
         </form>
