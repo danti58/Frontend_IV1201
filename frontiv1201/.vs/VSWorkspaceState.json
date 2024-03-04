@@ -11,6 +11,6 @@
     "\\src\\app\\redux",
     "\\src\\pages"
   ],
-  "SelectedNode": "\\src\\app\\api.ts",
+  "SelectedNode": "\\src\\app\\components\\register\\registerView.tsx",
   "PreviewInSolutionExplorer": false
 }
