@@ -42,7 +42,7 @@ const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, 
         <label style={{ display: 'block', marginBottom: '5px' }}>Years of experience:</label>
         <input
           className="bg-white text-black"
-          type="text"
+          type="number"
           value={competencyData.yearsOfExperience}
           onChange={(e) =>
             setCompetencyData({
