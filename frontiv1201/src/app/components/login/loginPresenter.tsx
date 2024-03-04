@@ -1,7 +1,7 @@
 // loginPresenter.tsx
 
 import React from 'react';
-import { loginPerson, LoginData } from '@/app/api';
+import { loginPerson, LoginData, requestPasswordResetLink } from '@/app/api';
 import LoginView from './loginView';
 import { setAuthData } from '@/app/redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +14,7 @@ function LoginPresenter() {
 
   const dispatch = useDispatch();
   const auth = useSelector((state: any) => state.auth.userState);
+  const [message, setMessage] = React.useState<string | null>(null);
 
   /**
    * State to store the login data from the form inputs.
@@ -31,6 +32,7 @@ function LoginPresenter() {
   function onLoginSuccess(response: any) {
     // print response json:
     console.log('Login success:', response);
+    setMessage('Login success');
     // Redirect to the home page after successful login
     const user = response.user;
     if (user.role_id === 1) {
@@ -48,6 +50,7 @@ function LoginPresenter() {
    */
   function onLoginFail(error: any) {
     console.error('Login failed:', error);
+    setMessage('Login failed');
     }
 
     /**
@@ -82,7 +85,7 @@ function LoginPresenter() {
   };
 
   
-  return <LoginView loginData={loginData} setLoginData={setLoginData} handleLogin={handleLogin} />;
+  return <LoginView loginData={loginData} setLoginData={setLoginData} handleLogin={handleLogin} message={message} />;
 };
 
 export default LoginPresenter;

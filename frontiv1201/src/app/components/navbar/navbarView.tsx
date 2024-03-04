@@ -1,3 +1,5 @@
+// navbarView.tsx
+
 import { UserState } from '@/app/redux/types';
 import Link from 'next/link';
 import React from 'react';
