@@ -8,6 +8,7 @@ interface Props {
   registerData: RegisterData;
   setRegisterData: (data: RegisterData) => void;
   handleRegister: () => void;
+  message: string | null;
 }
 
 /**
@@ -16,7 +17,7 @@ interface Props {
  * @param p - Register view component props
  * @returns - Register view component
  */
-const RegisterView: React.FC<Props> = ({ registerData, setRegisterData, handleRegister }) => (
+const RegisterView: React.FC<Props> = ({ registerData, setRegisterData, handleRegister, message }) => (
   <div className="register-form">
     <Link href="/">Go Back</Link>
     
@@ -79,6 +80,7 @@ const RegisterView: React.FC<Props> = ({ registerData, setRegisterData, handleRe
       />
     </label>
     <button onClick={handleRegister}>Register</button>
+    {message && <p>{message}</p>}
   </div>
 );
 

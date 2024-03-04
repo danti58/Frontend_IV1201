@@ -20,6 +20,7 @@ interface RegisterData {
  */
 function RegisterPresenter () {
   const router = useRouter();
+  const [message, setMessage] = React.useState<string | null>(null);
   const [registerData, setRegisterData] = React.useState<RegisterData>({
     name: '',
     surname: '',
@@ -37,6 +38,7 @@ function RegisterPresenter () {
    */
   function onRegisterSuccess(response: any) {
     console.log('Register success:', response);
+    setMessage('Register success');
     router.push('/login');
   }
 
@@ -46,6 +48,7 @@ function RegisterPresenter () {
    * @param error - Error message
    */
   function onRegisterFail(error: any) {
+    setMessage('Register failed');
     console.error('Register failed:', error);
   }
 
@@ -66,7 +69,7 @@ function RegisterPresenter () {
   
   
 
-  return <RegisterView registerData={registerData} setRegisterData={setRegisterData} handleRegister={handleRegister} />;
+  return <RegisterView registerData={registerData} setRegisterData={setRegisterData} handleRegister={handleRegister} message={message} />;
 };
 
 export default RegisterPresenter;

@@ -5,6 +5,7 @@ interface Props {
   loginData: LoginData;
   setLoginData: (loginData: LoginData) => void;
   handleLogin: (event: React.FormEvent<HTMLFormElement>) => void; // Updated to handle form event
+  message:string | null;
 }
 
 /**
@@ -13,7 +14,7 @@ interface Props {
  * @param param0  - Login view component props
  * @returns - Login view component
  */
-const LoginView: React.FC<Props> = ({ loginData, setLoginData, handleLogin }) => (
+const LoginView: React.FC<Props> = ({ loginData, setLoginData, handleLogin, message }) => (
   <div>
     {/* Wrap inputs with a form tag and use onSubmit event */}
     <form onSubmit={handleLogin}>
@@ -41,6 +42,7 @@ const LoginView: React.FC<Props> = ({ loginData, setLoginData, handleLogin }) =>
       >
         Login
       </button>
+      {message && <p>{message}</p>}
 
       <button>
         <a href="/passwordResetLinkRequestPage">[Forgot Password]</a>
