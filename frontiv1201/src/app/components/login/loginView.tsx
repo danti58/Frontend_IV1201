@@ -1,5 +1,6 @@
 import React from 'react';
 import { LoginData } from '@/app/api';
+import Link from 'next/link';
 
 interface Props {
   loginData: LoginData;
@@ -44,9 +45,9 @@ const LoginView: React.FC<Props> = ({ loginData, setLoginData, handleLogin, mess
       </button>
       {message && <p>{message}</p>}
 
-      <button>
-        <a href="/passwordResetLinkRequestPage">[Forgot Password]</a>
-      </button>
+      
+      <Link href="/passwordResetLinkRequestPage">[Forgot Password]</a>
+
     </form>
   </div>
 );
