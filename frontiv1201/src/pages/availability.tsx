@@ -1,10 +1,13 @@
 import React from 'react';
 import AvailabilityPresenter from '../app/components/availability/availabilityPresenter';
-import styles from '../styles/Home.module.css';
 import { useSelector } from 'react-redux';
 
-// Import your LoginComponent here
 
+/**
+ * Page component for the availability page.
+ * 
+ * @returns - Availability presenter component
+ */
 export default function Availability() {
   const userState = useSelector((state: any) => state.auth.userState);
 

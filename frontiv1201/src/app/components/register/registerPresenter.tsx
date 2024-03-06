@@ -48,7 +48,7 @@ function RegisterPresenter () {
    * @param error - Error message
    */
   function onRegisterFail(error: any) {
-    setMessage('Register failed');
+    setMessage('Register failed: ' + error.message);
     console.error('Register failed:', error);
   }
 
@@ -56,6 +56,14 @@ function RegisterPresenter () {
    * Handles response from API call after successful registration.
    */
   const handleRegister = async () => {
+
+    //check if personal number is valid, if not set message and return
+    if (!/^\d{10}$/.test(registerData.pnr)) {
+      setMessage('Invalid personal number');
+      return;
+    }
+
+
     try {
       // Update the role_id to 2 right before sending.
       const payload = { ...registerData, role_id: '2' };

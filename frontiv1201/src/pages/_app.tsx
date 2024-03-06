@@ -4,6 +4,7 @@ import '../app/globals.css'; // Adjust the path to your globals.css file
 import { Provider } from 'react-redux';
 import store from '@/app/redux/store';
 import NavbarPresenter from '@/app/components/navbar/navbarPresenter';
+import { GlobalDiv } from '@/app/styles/styles';
 
 
 /**
@@ -16,8 +17,10 @@ import NavbarPresenter from '@/app/components/navbar/navbarPresenter';
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider store={store}>
+      <GlobalDiv>
       <NavbarPresenter />
       <Component {...pageProps} />
+      </GlobalDiv>
     </Provider>
   );
 };

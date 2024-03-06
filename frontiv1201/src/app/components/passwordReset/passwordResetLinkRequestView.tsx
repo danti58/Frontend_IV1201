@@ -1,5 +1,37 @@
-// components/PasswordResetLinkRequestView.tsx
+// PasswordResetLinkRequestView.tsx
+
 import React from 'react';
+import styled from 'styled-components';
+import { Input, Button, Card, Text } from '@/app/styles/styles'; // Update the import path according to your project structure
+
+// Styled components for this view
+const PasswordResetCard = styled(Card)`
+  max-width: 400px;
+  margin: 2rem auto;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const FormField = styled.div`
+  margin-bottom: 20px;
+`;
+
+const Label = styled.label`
+  display: block;
+  color: #333;
+  margin-bottom: 5px;
+`;
+
+const SubmitButton = styled(Button)`
+  margin-top: 10px;
+`;
+
+const MessageText = styled(Text)`
+  margin-top: 10px;
+`;
 
 type PasswordResetLinkRequestViewProps = {
   email: string;
@@ -8,29 +40,42 @@ type PasswordResetLinkRequestViewProps = {
   onSubmit: () => void;
 };
 
-const PasswordResetLinkRequestView: React.FC<PasswordResetLinkRequestViewProps> = ({ email, message, onEmailChange, onSubmit }) => {
+/**
+ * View for requesting password reset link
+ * @param email - email address
+ * @param message - success or error message
+ * @param onEmailChange - function to handle email change
+ * @param onSubmit - function to handle form submission
+ * @returns - a view for requesting password reset link
+ */
+
+const PasswordResetLinkRequestView: React.FC<PasswordResetLinkRequestViewProps> = ({
+  email,
+  message,
+  onEmailChange,
+  onSubmit,
+}) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit();
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
-            className="bg-white text-black"
+    <PasswordResetCard>
+      <Form onSubmit={handleSubmit}>
+        <FormField>
+          <Label>Email:</Label>
+          <Input
             type="email"
             value={email}
             onChange={(event) => onEmailChange(event.target.value)}
             required
           />
-        </label>
-        <button type="submit">[Send Reset Link]</button>
-        {message && <p>{message}</p>}
-      </form>
-    </div>
+        </FormField>
+        <SubmitButton type="submit">Send Reset Link</SubmitButton>
+        {message && <MessageText>{message}</MessageText>}
+      </Form>
+    </PasswordResetCard>
   );
 };
 

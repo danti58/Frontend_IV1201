@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { AvailabilityData } from '@/app/api';
+import { Button,Container, Title, Text } from '@/app/styles/styles';
 
 interface Props {
   availabilityData: AvailabilityData;
@@ -9,95 +10,99 @@ interface Props {
   handleDateSelect: (event: React.FormEvent<HTMLFormElement>) => void;
   successMessage: string;
   setSuccessMessage: (successMessage: string) => void;
+  currentAvailabilities: any[];
 }
+import styled from 'styled-components';
 
-const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage }) => {
 
-  const styles = `
-    .availability-view-container {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #f9f9f9;
+const LabelTitle = styled(Title)`	
+  font-size: 1rem;	
+  font-weight: normal;	
+  margin-bottom: 1rem;	
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Label = styled.label`
+  display: block;
+  color: #333;
+  margin-bottom: 5px;
+  margin-right: 10px;
+`;
+
+const WhiteContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  margin: 2rem auto;
+  width: 50%;
+  border-radius: 15px;
+`;
+
+/**
+  * View for availability management
+  * @param availabilityData - object containing availability data
+  * @param setAvailabilityData - function to set availability data
+  * @param handleDateSelect - function to handle date selection
+  * @param successMessage - success message
+  * @param currentAvailabilities - array of current availabilities
+  * @returns - a view for availability management
+ */
+
+const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage, currentAvailabilities }) => {
+  function renderAvailabilities() {
+    for (let i = 0; i < currentAvailabilities.length; i++) {
+
+      let fromDate = new Date(currentAvailabilities[i].from_date);
+      let toDate = new Date(currentAvailabilities[i].to_date);
+      return (
+        <div key={i}>
+          <Text>
+            {fromDate.toUTCString()} - {toDate.toUTCString()}
+          </Text>
+        </div>
+      );
     }
-
-    .success-message {
-      color: green;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .username {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    .date-picker-container {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .date-label {
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .date-picker {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .add-button {
-      background-color: lightgrey;
-      color: black;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .add-button:hover {
-      background-color: #ccc;
-    }
-  `;
+  }
 
   return (
-    <div>
-      <style>{styles}</style>
-      <div className="availability-view-container">
-        {successMessage && <p className="success-message">{successMessage}</p>}
-        <div className="username">Username: {availabilityData.requestedUsername}</div>
-        <form className="bg-white text-black" onSubmit={handleDateSelect}>
-          <div className="date-picker-container">
-            <label className="date-label">
-              From date:
+<>
+      <WhiteContainer>
+
+        {successMessage && <p>{successMessage}</p>}
+        <StyledForm onSubmit={handleDateSelect}>
+          <LabelTitle>
+            <Label>
+              <Text>From date:</Text>
               <DatePicker
                 selected={new Date(availabilityData.fromDate)}
                 onChange={(e) => setAvailabilityData({ ...availabilityData, fromDate: e? new Date(e) : new Date('')})}
-                className="date-picker"
                 dateFormat="yyyy-MM-dd"
               />
-            </label>
-            <label className="date-label">
-              To date:
+            </Label>
+            <Label>
+            <Text>To date:</Text>
               <DatePicker
                 selected={new Date(availabilityData.toDate)}
                 onChange={(e) => setAvailabilityData({ ...availabilityData, toDate:  e? new Date(e) : new Date('')})}
-                className="date-picker"
                 dateFormat="yyyy-MM-dd"
               />
-            </label>
-          </div>
-          <button className="add-button" type="submit">
+            </Label>
+          </LabelTitle>
+          <Button className="add-button" type="submit">
             ADD
-          </button>
-        </form>
-      </div>
-    </div>
+          </Button>
+        </StyledForm>
+
+        <Title>Current availabilities</Title>
+        {renderAvailabilities()}
+
+      </WhiteContainer>
+      </>
   );
 };
 

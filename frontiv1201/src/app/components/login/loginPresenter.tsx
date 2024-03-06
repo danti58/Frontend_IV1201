@@ -50,7 +50,7 @@ function LoginPresenter() {
    */
   function onLoginFail(error: any) {
     console.error('Login failed:', error);
-    setMessage('Login failed');
+    setMessage('Credentials do not match any registred user. \n Please try again or register a new account.');
     }
 
     /**

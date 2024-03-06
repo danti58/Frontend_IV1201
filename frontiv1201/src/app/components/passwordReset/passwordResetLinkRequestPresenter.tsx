@@ -4,6 +4,12 @@ import PasswordResetLinkRequestView from './passwordResetLinkRequestView';
 import { requestPasswordResetLink } from '@/app/api';
 import { useRouter } from 'next/router';
 
+/**
+ * Presenter component for the password reset link request page, handles the password reset link request logic and passes the data to the view component.
+ * 
+ * @returns  - Password reset link request view component
+ */
+
 const PasswordResetLinkRequestPresenter: React.FC = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState<string | null>(null);
