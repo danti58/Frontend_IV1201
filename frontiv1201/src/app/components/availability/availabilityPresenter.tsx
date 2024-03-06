@@ -4,6 +4,12 @@ import { AvailabilityData, addAvailability } from '@/app/api';
 import { useSelector } from 'react-redux';
 import { getAvailability } from '@/app/api';
 
+/**
+ * Presenter component for the availability page, handles the availability logic and passes the data to the view component.
+ * 
+ * @returns  - Availability view component
+ */
+
 function AvailabilityPresenter() {
   const userState = useSelector((state: any) => state.auth.userState);
   const [currentAvailabilities, setCurrentAvailabilities] = useState([]);

@@ -72,6 +72,15 @@ interface Props {
   message: string | null;
 }
 
+/**
+ * View for registering a new account
+ * @param registerData - object containing register data
+ * @param setRegisterData - function to set register data
+ * @param handleRegister - function to handle registration
+ * @param message - message to display
+ * @returns - a view for registering a new account
+ */
+
 const RegisterView: React.FC<Props> = ({
   registerData,
   setRegisterData,

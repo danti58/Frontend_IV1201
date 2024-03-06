@@ -38,6 +38,13 @@ type PasswordResetViewProps = {
   message: string | null;
 };
 
+/**
+ * View for password reset
+ * @param onResetPassword - function to reset password
+ * @param message - success or error message
+ * @returns - a view for password reset
+ */
+
 const PasswordResetView: React.FC<PasswordResetViewProps> = ({ onResetPassword, message }) => {
   const [token, setToken] = useState('');
   const [newPassword, setNewPassword] = useState('');

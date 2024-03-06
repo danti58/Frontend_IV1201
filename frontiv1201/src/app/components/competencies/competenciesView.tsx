@@ -50,6 +50,15 @@ interface Props {
   setSuccessMessage: (successMessage: string) => void;
 }
 
+/**
+ * View for competencies management
+ * @param competencyData - object containing competency data
+ * @param setCompetencyData - function to set competency data
+ * @param handleChange - function to handle form submission
+ * @param successMessage - success message
+ * @returns - a view for competencies management
+ */
+
 const CompetenciesView: React.FC<Props> = ({
   competencyData,
   setCompetencyData,

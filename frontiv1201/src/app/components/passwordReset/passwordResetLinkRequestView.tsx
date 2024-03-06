@@ -40,6 +40,15 @@ type PasswordResetLinkRequestViewProps = {
   onSubmit: () => void;
 };
 
+/**
+ * View for requesting password reset link
+ * @param email - email address
+ * @param message - success or error message
+ * @param onEmailChange - function to handle email change
+ * @param onSubmit - function to handle form submission
+ * @returns - a view for requesting password reset link
+ */
+
 const PasswordResetLinkRequestView: React.FC<PasswordResetLinkRequestViewProps> = ({
   email,
   message,

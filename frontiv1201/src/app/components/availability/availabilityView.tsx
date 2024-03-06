@@ -42,6 +42,17 @@ const WhiteContainer = styled(Container)`
   width: 50%;
   border-radius: 15px;
 `;
+
+/**
+  * View for availability management
+  * @param availabilityData - object containing availability data
+  * @param setAvailabilityData - function to set availability data
+  * @param handleDateSelect - function to handle date selection
+  * @param successMessage - success message
+  * @param currentAvailabilities - array of current availabilities
+  * @returns - a view for availability management
+ */
+
 const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage, currentAvailabilities }) => {
   function renderAvailabilities() {
     for (let i = 0; i < currentAvailabilities.length; i++) {
