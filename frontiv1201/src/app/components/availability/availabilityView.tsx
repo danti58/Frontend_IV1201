@@ -33,25 +33,12 @@ const Label = styled.label`
   margin-right: 10px;
 `;
 
-const CustomContainer = styled(Container)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  align-self: center;
-  align-content: center;
-
-`;
 const WhiteContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  align-self: center;
-  justify-items: center;
   background-color: white;
-  margin: 1rem;
+  margin: 2rem auto;
   width: 50%;
   border-radius: 15px;
 `;
@@ -72,7 +59,7 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
   }
 
   return (
-    <CustomContainer>
+<>
       <WhiteContainer>
 
         {successMessage && <p>{successMessage}</p>}
@@ -104,7 +91,7 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
         {renderAvailabilities()}
 
       </WhiteContainer>
-    </CustomContainer>
+      </>
   );
 };
 
