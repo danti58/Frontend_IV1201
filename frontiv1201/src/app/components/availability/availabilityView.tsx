@@ -51,7 +51,6 @@ const WhiteContainer = styled(Container)`
   align-self: center;
   justify-items: center;
   background-color: white;
-  padding: 1rem;
   margin: 1rem;
   width: 50%;
   border-radius: 15px;
