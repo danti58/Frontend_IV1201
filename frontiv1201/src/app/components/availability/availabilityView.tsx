@@ -31,6 +31,10 @@ const Label = styled.label`
   margin-bottom: 5px;
   margin-right: 10px;
 `;
+
+const CustomContainer = styled(Container)`
+margin: 2rem auto;
+`;
 const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage }) => {
 
   const styles = `
@@ -94,7 +98,7 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
 
 
   return (
-    <Container>
+    <CustomContainer>
       <style>{styles}</style>
       <Container className="availability-view-container">
         {successMessage && <p className="success-message">{successMessage}</p>}
@@ -124,7 +128,7 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
           </Button>
         </StyledForm>
       </Container>
-    </Container>
+    </CustomContainer>
   );
 };
 
