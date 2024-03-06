@@ -30,14 +30,6 @@ const FormLabel = styled.label`
   display: block;
 `;
 
-const ForgotPasswordLink = styled.a`
-  color: ${() => colors.info};
-  cursor: pointer;
-  margin-top: 1rem;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
 
 // Props interface remains unchanged
 interface Props {

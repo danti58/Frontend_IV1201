@@ -21,7 +21,7 @@ const WelcomeMessage = styled.p`
   margin: 1rem 0;
 `;
 
-const RegisterLink = styled.a`
+const RegisterLink = styled.p`
   color: ${() => colors.primary};
   cursor: pointer;
   text-decoration: underline;
