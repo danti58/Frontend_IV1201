@@ -10,6 +10,7 @@ interface Props {
   handleDateSelect: (event: React.FormEvent<HTMLFormElement>) => void;
   successMessage: string;
   setSuccessMessage: (successMessage: string) => void;
+  currentAvailabilities: any[];
 }
 import styled from 'styled-components';
 
@@ -33,92 +34,64 @@ const Label = styled.label`
 `;
 
 const CustomContainer = styled(Container)`
-margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  align-self: center;
+  align-content: center;
+
 `;
-const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage }) => {
+const WhiteContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  justify-items: center;
+  background-color: white;
+  padding: 1rem;
+  margin: 1rem;
+  width: 50%;
+  border-radius: 15px;
+`;
+const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage, currentAvailabilities }) => {
+  function renderAvailabilities() {
+    for (let i = 0; i < currentAvailabilities.length; i++) {
 
-  const styles = `
-    .availability-view-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      align-content: center;
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #f9f9f9;
+      let fromDate = new Date(currentAvailabilities[i].from_date);
+      let toDate = new Date(currentAvailabilities[i].to_date);
+      return (
+        <div key={i}>
+          <Text>
+            {fromDate.toUTCString()} - {toDate.toUTCString()}
+          </Text>
+        </div>
+      );
     }
-
-    .success-message {
-      color: green;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .username {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    .date-picker-container {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .date-label {
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .date-picker {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .add-button {
-      background-color: lightgrey;
-      color: black;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .add-button:hover {
-      background-color: #ccc;
-    }
-  `;
-
-
-
-
+  }
 
   return (
     <CustomContainer>
-      <style>{styles}</style>
-      <Container className="availability-view-container">
-        {successMessage && <p className="success-message">{successMessage}</p>}
-        <StyledForm className="bg-white text-black" onSubmit={handleDateSelect}>
-          <LabelTitle className="date-picker-container">
-            <Label className="date-label">
+      <WhiteContainer>
+
+        {successMessage && <p>{successMessage}</p>}
+        <StyledForm onSubmit={handleDateSelect}>
+          <LabelTitle>
+            <Label>
               <Text>From date:</Text>
               <DatePicker
                 selected={new Date(availabilityData.fromDate)}
                 onChange={(e) => setAvailabilityData({ ...availabilityData, fromDate: e? new Date(e) : new Date('')})}
-                className="date-picker"
                 dateFormat="yyyy-MM-dd"
               />
             </Label>
-            <Label className="date-label">
+            <Label>
             <Text>To date:</Text>
               <DatePicker
                 selected={new Date(availabilityData.toDate)}
                 onChange={(e) => setAvailabilityData({ ...availabilityData, toDate:  e? new Date(e) : new Date('')})}
-                className="date-picker"
                 dateFormat="yyyy-MM-dd"
               />
             </Label>
@@ -127,7 +100,11 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
             ADD
           </Button>
         </StyledForm>
-      </Container>
+
+        <Title>Current availabilities</Title>
+        {renderAvailabilities()}
+
+      </WhiteContainer>
     </CustomContainer>
   );
 };

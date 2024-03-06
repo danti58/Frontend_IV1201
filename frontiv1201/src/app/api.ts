@@ -163,12 +163,11 @@ export const addCompetency = async (competencyData: CompetencyData, token: strin
   try {
     const response: AxiosResponse<AddCompetencyResponse> = await axios.post(`${BASE_URL}/addCompetencyToPerson`, competencyData , {
       headers: { token: `${token}` },
+    
     });
     return response.data;
   } catch (error) {
     console.error('Error adding competence:', error);
-    console.log('data:', competencyData)
-    console.log('token:', token)
     throw error;
   }
 };
@@ -183,6 +182,35 @@ export const addAvailability = async (availabilityData: AvailabilityData, token:
     console.error('Error adding competence:', error);
     console.log('data:', availabilityData)
     console.log('token:', token)
+    throw error;
+  }
+};
+
+interface GetAvailabilityResponse {
+  message: string;
+  availability?: Array<{
+    fromDate: Date;
+    toDate: Date;
+  }>;
+}
+
+/**
+ * Fetches availability data for a given username from the backend.
+ * 
+ * @param username - The username for which to fetch availability data.
+ * @param token - The token required for authentication.
+ * @returns - The availability data.
+ */
+export const getAvailability = async (token: string): Promise<GetAvailabilityResponse> => {
+  try {
+    const response: AxiosResponse<GetAvailabilityResponse> = await axios.get(`${BASE_URL}/getAvailability`, {
+      headers: {
+        token: `${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch availability', error);
     throw error;
   }
 };

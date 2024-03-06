@@ -120,7 +120,7 @@ const AdminApplicantsView: React.FC<Props> = ({ applicants }) => {
     return <CompetencyText>{result}</CompetencyText>;
   }
   function renderAvailability(availability: any) {
-    let result = availability.from_date + ' - ' + availability.to_date;
+    let result = (availability.fromDate as Date).toISOString() + ' - ' + (availability.toDate as Date).toISOString();
     return <CompetencyText>{result}</CompetencyText>;
   }
 

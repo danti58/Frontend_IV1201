@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import AvailabilityView from './availabilityView';
 import { AvailabilityData, addAvailability } from '@/app/api';
 import { useSelector } from 'react-redux';
+import { getAvailability } from '@/app/api';
 
 function AvailabilityPresenter() {
   const userState = useSelector((state: any) => state.auth.userState);
+  const [currentAvailabilities, setCurrentAvailabilities] = useState([]);
 
   const [availabilityData, setAvailabilityData] = React.useState<AvailabilityData>({
     requestedUsername: userState.username,
@@ -13,6 +15,32 @@ function AvailabilityPresenter() {
   });
 
   const [successMessage, setSuccessMessage] = React.useState<string>('');
+
+  // Fetch the current availabilities from the API
+
+  React.useEffect(() => {
+
+    async function fetchAvailabilities() {
+      try {
+        const response = await getAvailability(userState.token);
+        console.log('response:', response);
+        onGetAvailabilitySuccess(response);
+      } catch (error) {
+        onGetAvailabilityFail(error);
+      }
+    }
+    fetchAvailabilities();
+  }, []);
+
+  function onGetAvailabilitySuccess(response: any) {
+    // print response json:
+    console.log('Get availability success:', response);
+    setCurrentAvailabilities(response);
+  }
+  function onGetAvailabilityFail(error: any) {
+    console.error('Get availability failed:', error);
+  }
+
 
   function onAddvailabilitySuccess(response: any) {
     // print response json:
@@ -49,6 +77,7 @@ function AvailabilityPresenter() {
       handleDateSelect={handleDateSelect}
       successMessage={successMessage}
       setSuccessMessage={setSuccessMessage}
+      currentAvailabilities={currentAvailabilities}
     />
   );
 }
