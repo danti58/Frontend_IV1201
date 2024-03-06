@@ -1,6 +1,35 @@
+// index.tsx
 import Link from 'next/link';
-import styles from '../styles/Home.module.css';
+import React from 'react';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { Container, Title, Text, Button } from '@/app/styles/styles'; // Update this path to where your styles.ts file is actually located
+import { colors } from '@/app/styles/styles';
+
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 100vh;
+  text-align: center;
+`;
+
+const WelcomeMessage = styled.p`
+  font-size: 1.25rem;
+  margin: 1rem 0;
+`;
+
+const RegisterLink = styled.a`
+  color: ${() => colors.primary};
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    color: ${() => colors.info};
+  }
+`;
 
 /**
  * Home page component
@@ -8,28 +37,23 @@ import { useSelector } from 'react-redux';
  * @returns - Home page component
  */
 export default function Home() {
-
-  /**
-   * Get the user state from the Redux store to check if the user is logged in.
-   */
   const userState = useSelector((state: any) => state.auth.userState);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-10">
-      <h1 className="text-4xl font-semibold mb-4 text-center">
-        Recruitment app Group 7
-      </h1>
+    <Container>
+      <Main>
+        <Title>Recruitment app Group 7</Title>
 
-      <p className="text-lg text-center">
-        {userState.username ? `Welcome, ${userState.username}` : 'To access this app, please login or register.'}
-      </p>
+        <WelcomeMessage>
+          {userState.username ? `Welcome, ${userState.username}` : 'To access this app, please login or register.'}
+        </WelcomeMessage>
 
-      {!userState.username && (
-        <Link href="/register">
-          <p className="text-blue-500 underline cursor-pointer">Register here</p>
-        </Link>
-      )}
-
-    </main>
+        {!userState.username && (
+          <Link href="/register" passHref>
+            <RegisterLink>Register here</RegisterLink>
+          </Link>
+        )}
+      </Main>
+    </Container>
   );
 }

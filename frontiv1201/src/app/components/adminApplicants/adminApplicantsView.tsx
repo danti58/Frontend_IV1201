@@ -1,43 +1,85 @@
 // adminApplicantsView.tsx
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { User } from '@/app/types/User';
-import React, { useState } from 'react';
-// Define a type for the keys of User that can be used for sorting
+import { Card, Container, Button, Title, Text, Input } from '@/app/styles/styles';
+
 type SortKey = 'name' | 'surname'; // Add other keys as needed
 
 type Props = {
   applicants: Array<User>;
 };
 
+// Styled components for this specific view
+const ApplicantsContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ApplicantCard = styled(Card)`
+  cursor: pointer;
+  &:hover {
+    background-color: #f3f3f3;
+  }
+`;
+
+const ApplicantDetails = styled.div`
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-top: 1rem;
+`;
+
+const CompetencyText = styled.p`
+  color: red;
+`;
+
+const SortButton = styled(Button)`
+  margin-right: 1rem;
+  max-width: 200px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+`;
+
+const ApplicantTitle = styled(Title)`
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  `;
+
+  const SearchInput = styled(Input)`
+  margin-bottom: 20px; // Adjust styling as necessary
+`;
 /**
- * View component for the admin applicants page, displays the applicants and handles the sorting logic.
- * 
- * @param applicants - The applicants to display
- * @returns - Admin applicants view component
+  * Admin applicants view component
+  * 
+  * @param {Array<User>} applicants - Array of applicants
+  * @returns - Admin applicants view component
  */
-function AdminApplicantsView({ applicants }: Props) {
+
+const AdminApplicantsView: React.FC<Props> = ({ applicants }) => {
   const [sortKey, setSortKey] = useState<SortKey>('name');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [expandedApplicantId, setExpandedApplicantId] = useState<number | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
 
-  /**
-   * Sorts the applicants based on the current sort key and order.
-   */
   const sortedApplicants = [...applicants].sort((a, b) => {
     const valueA = a[sortKey];
     const valueB = b[sortKey];
-    
-    // Assuming the values are string for simplicity, adjust as necessary for other types
     if (valueA < valueB) return sortOrder === 'asc' ? -1 : 1;
     if (valueA > valueB) return sortOrder === 'asc' ? 1 : -1;
     return 0;
   });
 
-  /**
-   * Handles the sort change event and updates the sort key and order.
-   * 
-   * @param key - Requested sort key
-   */
+  const [filteredApplicants, setFilteredApplicants] = useState(sortedApplicants);
+
+  useEffect(() => {
+    const results = applicants.filter(applicant =>
+      applicant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      applicant.surname.toLowerCase().includes(searchTerm.toLowerCase()) || applicant.email.toLowerCase().includes(searchTerm.toLowerCase()) || applicant.pnr.toLowerCase().includes(searchTerm.toLowerCase()) || applicant.username.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredApplicants(results);
+  }, [searchTerm, applicants]);
+
   const handleSortChange = (key: SortKey) => {
     if (sortKey === key) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -47,74 +89,47 @@ function AdminApplicantsView({ applicants }: Props) {
     }
   };
 
-  /**
-   * Displays the competencies of the applicant.
-   * 
-   * @param competencies - Retrived competencies from the API
-   * @returns - The competencies of the applicant
-   */
   function renderCompetencies(competencies: any) {
-    console.log(competencies);
-    let result = '';
-    result += competencies.competency_name;
-    result += ' ';
-    result += Math.round(competencies.years_of_experience) + ' years';
-    return <p style={{ color: 'red' }}>{result}</p>;
+    let result = competencies.competency_name + ' ' + Math.round(competencies.years_of_experience) + ' years';
+    return <CompetencyText>{result}</CompetencyText>;
   }
 
-  /**
-   * Displays the applicants and their details.
-   * 
-   * @param applicant - The applicant to display
-   * @returns - The applicant details
-   */
   function mapApplicants(applicant: User) {
     return (
-      <div key={applicant.person_id}>
-        <div onClick={() => toggleApplicantDetails(applicant.person_id)}>
-          <p>{applicant.name} {applicant.surname}</p>
-        </div>
+      <ApplicantCard key={applicant.person_id} onClick={() => toggleApplicantDetails(applicant.person_id)}>
+        <ApplicantTitle>{applicant.name} {applicant.surname}</ApplicantTitle>
         {expandedApplicantId === applicant.person_id && (
-          <div style={{ border: '1px solid red', padding: '1rem' }}>
-            {/* Expanded applicant details */}
-            <p>Email: {applicant.email}</p>
-            <p>PNR: {applicant.pnr}</p>
-            <p>Username: {applicant.username}</p>
-            {/* if competencies are not null */}
+          <ApplicantDetails>
+            <Text>Email: {applicant.email}</Text>
+            <Text>PNR: {applicant.pnr}</Text>
+            <Text>Username: {applicant.username}</Text>
             {applicant.competencies ? (
-              <p>Competencies: {applicant.competencies.map(renderCompetencies)}</p>
+              <Text>Competencies: {applicant.competencies.map(renderCompetencies)}</Text>
             ) : (
-              <p>No competencies</p>
+              <Text>No competencies</Text>
             )}
-            {/* Include other details you want to show */}
-          </div>
+          </ApplicantDetails>
         )}
-      </div>
+      </ApplicantCard>
     );
   }
 
-  /**
-   * Toggles the expanded state of the applicant details.
-   * 
-   * @param id - The ID of the applicant to toggle the details for
-   */
   const toggleApplicantDetails = (id: number) => {
-    if (expandedApplicantId === id) {
-      // If clicking on the same applicant, collapse it
-      setExpandedApplicantId(null);
-    } else {
-      // Expand the clicked applicant
-      setExpandedApplicantId(id);
-    }
+    setExpandedApplicantId(expandedApplicantId === id ? null : id);
   };
 
   return (
-      <div>
-        <button onClick={() => handleSortChange('name')} >[Sort by first name] </button>
-        <button onClick={() => handleSortChange('surname')}>[Sort by surname]</button>
-       
-        {sortedApplicants.map(mapApplicants)}
-    </div>
+    <ApplicantsContainer>
+      <SortButton onClick={() => handleSortChange('name')}>Sort by first name</SortButton>
+      <SortButton onClick={() => handleSortChange('surname')}>Sort by surname</SortButton>
+      <SearchInput
+        type="text"
+        placeholder="Search applicants..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      {filteredApplicants.map(mapApplicants)}
+    </ApplicantsContainer>
   );
 };
 

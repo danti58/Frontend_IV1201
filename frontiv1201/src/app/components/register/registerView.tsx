@@ -1,8 +1,70 @@
+// RegisterView.tsx
+
 import React from 'react';
 import { RegisterData } from '@/app/api';
 import Link from 'next/link';
-import '../../styles/register.css';
+import styled from 'styled-components';
+import { Input, Button, Card, Title, Text } from '@/app/styles/styles'; // Adjust the import path if needed
 
+const RegisterForm = styled(Card)`
+display: flex;
+flex-direction: column;  
+max-width: 400px;
+  margin: 2rem auto;
+  align-items: center;
+
+`;
+
+const FormLabel = styled.label`
+  display: block;
+  margin: 1rem 0;
+`;
+
+const Tooltip = styled.span`
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  cursor: help;
+
+  &:hover span {
+    visibility: visible;
+  }
+`;
+
+const TooltipText = styled.span`
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+  }
+`;
+
+const BackLink = styled(Link)`
+  color: midnightblue;
+  margin-bottom: 1rem;
+  display: inline-block;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 interface Props {
   registerData: RegisterData;
@@ -11,78 +73,71 @@ interface Props {
   message: string | null;
 }
 
-/**
- * Register view component
- * 
- * @param p - Register view component props
- * @returns - Register view component
- */
-const RegisterView: React.FC<Props> = ({ registerData, setRegisterData, handleRegister, message }) => (
-  <div className="register-form">
-    <Link href="/">Go Back</Link>
+const RegisterView: React.FC<Props> = ({
+  registerData,
+  setRegisterData,
+  handleRegister,
+  message
+}) => (
+  <RegisterForm>
+    <BackLink href="/">Go Back</BackLink>
     
-    <h2>Register Form</h2>
-    <label>
-      First Name:
-      <input
-        className="bg-white text-black"
+    <Title>Register a new account</Title>
+    <FormLabel>
+      <Text>First Name:</Text>
+      <Input
         type="text"
         value={registerData.name}
         onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
       />
-    </label>
-    <label>
-      Surname:
-      <input
-        className="bg-white text-black"
+    </FormLabel>
+    <FormLabel>
+      <Text>Surname:</Text>
+      <Input
         type="text"
         value={registerData.surname}
         onChange={(e) => setRegisterData({ ...registerData, surname: e.target.value })}
       />
-    </label>
-    <label>
-      Personal Number:
-      <input
-        className="bg-white text-black"
+    </FormLabel>
+    <FormLabel>
+      <Text>Personal Number:</Text>
+      <Input
         type="text"
         value={registerData.pnr}
         onChange={(e) => setRegisterData({ ...registerData, pnr: e.target.value })}
       />
-      <span className="tooltip">?
-        <span className="tooltiptext">Format: yymmddXXXX </span>
-      </span>
-    </label>
-    <label>
-      Email:
-      <input
-        className="bg-white text-black"
+      <Tooltip>
+        ?
+        <TooltipText>Format: yymmddXXXX</TooltipText>
+      </Tooltip>
+    </FormLabel>
+    <FormLabel>
+      <Text>Email:</Text>
+      <Input
         type="email"
         value={registerData.email}
         onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
       />
-    </label>
-    <label>
-      Password:
-      <input
-        className="bg-white text-black"
+    </FormLabel>
+    <FormLabel>
+      <Text> Password:</Text>
+      <Input
         type="password"
         value={registerData.password}
         onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
       />
-    </label>
-    <label>
-      Username:
-      <input
-        className="bg-white text-black"
+    </FormLabel>
+    <FormLabel>
+      <Text>Username:</Text>
+      <Input
         type="text"
         value={registerData.username}
         onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
       />
-    </label>
-    <button onClick={handleRegister}>Register</button>
-    {message && <p>{message}</p>}
-  </div>
+    </FormLabel>
+    <Button onClick={handleRegister}>Register</Button>
+    {message && <Text>{message}</Text>}
+  </RegisterForm>
 );
-
 
 export default RegisterView;
