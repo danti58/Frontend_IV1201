@@ -119,6 +119,10 @@ const AdminApplicantsView: React.FC<Props> = ({ applicants }) => {
     let result = competencies.competency_name + ' ' + Math.round(competencies.years_of_experience) + ' years';
     return <CompetencyText>{result}</CompetencyText>;
   }
+  function renderAvailability(availability: any) {
+    let result = availability.from_date + ' - ' + availability.to_date;
+    return <CompetencyText>{result}</CompetencyText>;
+  }
 
   function mapApplicants(applicant: User) {
     return (
@@ -133,6 +137,11 @@ const AdminApplicantsView: React.FC<Props> = ({ applicants }) => {
               <Text>Competencies: {applicant.competencies.map(renderCompetencies)}</Text>
             ) : (
               <Text>No competencies</Text>
+            )}
+            {applicant.availability ? (
+              <Text>Availability: {applicant.availability.map(renderAvailability)}</Text>
+            ) : (
+              <Text>No availability</Text>
             )}
           </ApplicantDetails>
         )}
