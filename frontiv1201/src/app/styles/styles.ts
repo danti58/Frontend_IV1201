@@ -87,6 +87,8 @@ export const GlobalDiv = styled.div`
 
 // Container with max width and padding
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin-right: auto;
   margin-left: auto;

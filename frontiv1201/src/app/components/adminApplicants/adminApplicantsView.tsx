@@ -10,17 +10,47 @@ type Props = {
   applicants: Array<User>;
 };
 
-// Styled components for this specific view
+// Updated styles for ApplicantsContainer to center contents
 const ApplicantsContainer = styled(Container)`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
 `;
 
+// Adjusting ApplicantCard to ensure consistency in width and margin
 const ApplicantCard = styled(Card)`
   cursor: pointer;
+  width: 90%; // Adjust width as needed
+  margin: 1rem 0;
+
   &:hover {
     background-color: #f3f3f3;
   }
+`;
+
+// Sorting and Search Bar Container for alignment
+const ControlsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px; // Adjust the space between controls
+  width: 100%;
+  padding: 1rem;
+`;
+
+// Adjusting SortButton for visible margins and consistent sizing
+const SortButton = styled(Button)`
+  flex-grow: 1;
+  margin: 0.5rem;
+`;
+
+// Adjusting the width of SearchInput to not take up entire width
+const SearchInput = styled(Input)`
+  flex-grow: 2;
+  max-width: 400px; // Adjust max-width as needed for design consistency
+  margin: 0.5rem;
 `;
 
 const ApplicantDetails = styled.div`
@@ -33,21 +63,13 @@ const CompetencyText = styled.p`
   color: red;
 `;
 
-const SortButton = styled(Button)`
-  margin-right: 1rem;
-  max-width: 200px;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-`;
+
 
 const ApplicantTitle = styled(Title)`
   margin-bottom: 0.5rem;
   font-size: 1rem;
   `;
 
-  const SearchInput = styled(Input)`
-  margin-bottom: 20px; // Adjust styling as necessary
-`;
 /**
   * Admin applicants view component
   * 
@@ -60,25 +82,29 @@ const AdminApplicantsView: React.FC<Props> = ({ applicants }) => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [expandedApplicantId, setExpandedApplicantId] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-
-
-  const sortedApplicants = [...applicants].sort((a, b) => {
-    const valueA = a[sortKey];
-    const valueB = b[sortKey];
-    if (valueA < valueB) return sortOrder === 'asc' ? -1 : 1;
-    if (valueA > valueB) return sortOrder === 'asc' ? 1 : -1;
-    return 0;
-  });
-
-  const [filteredApplicants, setFilteredApplicants] = useState(sortedApplicants);
+  const [filteredApplicants, setFilteredApplicants] = useState<User[]>([]);
 
   useEffect(() => {
-    const results = applicants.filter(applicant =>
+    // First, filter the applicants based on the search term
+    const filtered = applicants.filter(applicant =>
       applicant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      applicant.surname.toLowerCase().includes(searchTerm.toLowerCase()) || applicant.email.toLowerCase().includes(searchTerm.toLowerCase()) || applicant.pnr.toLowerCase().includes(searchTerm.toLowerCase()) || applicant.username.toLowerCase().includes(searchTerm.toLowerCase())
+      applicant.surname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      applicant.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      applicant.pnr.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      applicant.username.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setFilteredApplicants(results);
-  }, [searchTerm, applicants]);
+
+    // Then, sort the filtered applicants
+    const sorted = filtered.sort((a, b) => {
+      const valueA = a[sortKey];
+      const valueB = b[sortKey];
+      if (valueA < valueB) return sortOrder === 'asc' ? -1 : 1;
+      if (valueA > valueB) return sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    setFilteredApplicants(sorted);
+  }, [applicants, searchTerm, sortKey, sortOrder]);
 
   const handleSortChange = (key: SortKey) => {
     if (sortKey === key) {
@@ -118,7 +144,7 @@ const AdminApplicantsView: React.FC<Props> = ({ applicants }) => {
     setExpandedApplicantId(expandedApplicantId === id ? null : id);
   };
 
-  return (
+  return (<>
     <ApplicantsContainer>
       <SortButton onClick={() => handleSortChange('name')}>Sort by first name</SortButton>
       <SortButton onClick={() => handleSortChange('surname')}>Sort by surname</SortButton>
@@ -130,6 +156,7 @@ const AdminApplicantsView: React.FC<Props> = ({ applicants }) => {
       />
       {filteredApplicants.map(mapApplicants)}
     </ApplicantsContainer>
+    </>
   );
 };
 
