@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-const BASE_URL = 'http://localhost:3000'; // Replace with your backend URL
+const BASE_URL = 'https://iv1201grupp7-6a51377e6715.herokuapp.com/'; // Replace with your backend URL
 
 export interface RegisterData {
   name: string;
