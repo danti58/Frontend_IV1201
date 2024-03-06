@@ -30,6 +30,16 @@ const FormLabel = styled.label`
   display: block;
 `;
 
+const ForgotLoginLink = styled.p`
+  color: ${() => colors.primary};
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    color: ${() => colors.info};
+  }
+`;
+
 
 // Props interface remains unchanged
 interface Props {
@@ -63,7 +73,7 @@ const LoginView: React.FC<Props> = ({ loginData, setLoginData, handleLogin, mess
       {message && <Text>{message}</Text>}
     </LoginForm>
     <Link href="/passwordResetLinkRequestPage" passHref>
-      Forgot Password?
+      <ForgotLoginLink>Forgot Password?</ForgotLoginLink>
     </Link>
   </LoginCard>
 );
