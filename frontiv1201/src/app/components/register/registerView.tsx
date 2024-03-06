@@ -17,7 +17,6 @@ max-width: 400px;
 
 const FormLabel = styled.label`
   display: block;
-  margin: 1rem 0;
 `;
 
 const Tooltip = styled.span`
@@ -135,6 +134,7 @@ const RegisterView: React.FC<Props> = ({
         onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
       />
     </FormLabel>
+    <p></p>
     <Button onClick={handleRegister}>Register</Button>
     {message && <Text>{message}</Text>}
   </RegisterForm>
