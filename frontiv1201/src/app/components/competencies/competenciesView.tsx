@@ -1,5 +1,46 @@
+// CompetenciesView.tsx
+
 import React from 'react';
-import { CompetencyData, LoginData } from '@/app/api';
+import { CompetencyData } from '@/app/api';
+import styled from 'styled-components';
+import { Container, Button, Input, Card, Title, Text } from '@/app/styles/styles';
+
+// Styled components for this view
+const CompetenciesCard = styled(Card)`
+  max-width: 500px;
+  margin: 2rem auto;
+`;
+
+const Form = styled.form`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const FormField = styled.div`
+  margin-bottom: 20px;
+`;
+
+const Label = styled.label`
+  display: block;
+  color: #333;
+  margin-bottom: 5px;
+`;
+
+const SuccessMessage = styled(Text)`
+  color: #4CAF50; // Success message color, adjust as needed
+`;
+
+const FormButton = styled(Button)`
+  background-color: #4CAF50; // Button background color, adjust as needed
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+`;
+const Select = styled.select`
+  padding: 10px 20px;
+  margin-top: 10px;
+`;
 
 interface Props {
   competencyData: CompetencyData;
@@ -11,65 +52,50 @@ interface Props {
 }
 
 /**
- * Competencies view component
- * 
- * @param param0  - The props of the component
- * @returns - Competencies view component
+ * View for competencies management
+ * @param competencyData - object containing competency data
+ * @param setCompetencyData - function to set competency data
+ * @param handleChange - function to handle form submission
+ * @param successMessage - success message
+ * @returns - a view for competencies management
  */
-const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, handleChange, successMessage, error }) => (
 
-  <div>
-     {successMessage && <p>{successMessage}</p>}
-     {error && <p>{error}</p>}
-    <label>
-      Username: {competencyData.requestedUsername} {/* Display the username from loginData */}
-    </label>
-    <form onSubmit={handleChange}>
-      <div style={{ marginBottom: '20px' }}>
-        <label style={{ display: 'block', marginBottom: '5px' }}>Competency name:</label>
-        <select
-          className="bg-white text-black"
+const CompetenciesView: React.FC<Props> = ({
+  competencyData,
+  setCompetencyData,
+  handleChange,
+  successMessage,
+  error
+}) => (
+  <CompetenciesCard>
+    {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
+    {error && <p>{error}</p>}
+    <Form onSubmit={handleChange}>
+      <FormField>
+        <Label>Competency name:</Label>
+        <Select
           value={competencyData.competencyName}
-          onChange={(e) =>
-            setCompetencyData({ ...competencyData, competencyName: e.target.value })
-          }
-          style={{ padding: '8px', borderRadius: '4px', width: '100%' }}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCompetencyData({ ...competencyData, competencyName: e.target.value })}
         >
           <option value="ticket sales">Ticket sales</option>
           <option value="lotteries">Lotteries</option>
           <option value="roller coaster operation">Roller coaster operation</option>
-        </select>
-      </div>
-      <div style={{ marginBottom: '20px' }}>
-        <label style={{ display: 'block', marginBottom: '5px' }}>Years of experience:</label>
-        <input
-          className="bg-white text-black"
+        </Select>
+      </FormField>
+      <FormField>
+        <Label>Years of experience:</Label>
+        <Input
           type="number"
           value={competencyData.yearsOfExperience}
-          onChange={(e) =>
-            setCompetencyData({
-              ...competencyData,
-              yearsOfExperience: parseInt(e.target.value) || 0,
-            })
-          }
-          style={{ padding: '8px', borderRadius: '4px', width: '100%' }}
+          onChange={(e) => setCompetencyData({
+            ...competencyData,
+            yearsOfExperience: parseInt(e.target.value) || 0,
+          })}
         />
-      </div>
-      <button
-        style={{
-          backgroundColor: '#4CAF50',
-          color: 'white',
-          padding: '10px 20px',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer',
-        }}
-        type="submit"
-      >
-        ADD
-      </button>
-    </form>
-  </div>
+      </FormField>
+      <FormButton type="submit">ADD</FormButton>
+    </Form>
+  </CompetenciesCard>
 );
 
 export default CompetenciesView;

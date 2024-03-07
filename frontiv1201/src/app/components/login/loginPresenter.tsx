@@ -58,7 +58,7 @@ function LoginPresenter() {
               setMessage('Username and password are required');
               break;
           case 500:
-              setMessage('Username or password is wrong/ can not connect to database');
+              setMessage('Credentials do not match any registred user. \n Please try again or register a new account. (/ can not connect to database)');
               break;
           default:
               setMessage('Login failed');

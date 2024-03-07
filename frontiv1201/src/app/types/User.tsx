@@ -5,6 +5,7 @@ export type User = {
     email: string;
     password: string;
     competencies: Array<string>;
+    availability: Array<string>;
     pnr: string;
     role_id: number;
     username: string;
