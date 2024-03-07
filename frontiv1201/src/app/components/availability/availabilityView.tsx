@@ -9,9 +9,10 @@ interface Props {
   handleDateSelect: (event: React.FormEvent<HTMLFormElement>) => void;
   successMessage: string;
   setSuccessMessage: (successMessage: string) => void;
+  error: string | null;
 }
 
-const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage }) => {
+const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage, error }) => {
 
   const styles = `
     .availability-view-container {
@@ -70,6 +71,7 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
       <style>{styles}</style>
       <div className="availability-view-container">
         {successMessage && <p className="success-message">{successMessage}</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <div className="username">Username: {availabilityData.requestedUsername}</div>
         <form className="bg-white text-black" onSubmit={handleDateSelect}>
           <div className="date-picker-container">

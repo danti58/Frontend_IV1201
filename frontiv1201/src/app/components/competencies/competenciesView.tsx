@@ -7,6 +7,7 @@ interface Props {
   handleChange: (event: React.FormEvent<HTMLFormElement>) => void;
   successMessage: string;
   setSuccessMessage: (successMessage: string) => void;
+  error: string | null;
 }
 
 /**
@@ -15,10 +16,11 @@ interface Props {
  * @param param0  - The props of the component
  * @returns - Competencies view component
  */
-const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, handleChange, successMessage }) => (
+const CompetenciesView: React.FC<Props> = ({ competencyData, setCompetencyData, handleChange, successMessage, error }) => (
 
   <div>
      {successMessage && <p>{successMessage}</p>}
+     {error && <p>{error}</p>}
     <label>
       Username: {competencyData.requestedUsername} {/* Display the username from loginData */}
     </label>

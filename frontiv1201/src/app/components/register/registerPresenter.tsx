@@ -48,8 +48,40 @@ function RegisterPresenter () {
    * @param error - Error message
    */
   function onRegisterFail(error: any) {
-    setMessage('Register failed');
-    console.error('Register failed:', error);
+    //setMessage('Register failed');
+      console.error('Register failed:', error);
+      switch (error.request.status) {
+          case 0:
+              setMessage('Server is down');
+              break;
+          case 400:
+              switch (error.response.data.message) {
+                  case 'All fields are required':
+                      setMessage('All fields are required');
+                      break;
+                  case 'Username is already in use':
+                      setMessage('Username is already in use');
+                      break;
+                  case 'Invalid personal number format':
+                      setMessage('Invalid personal number format');
+                      break;
+                  case 'Invalid email format':
+                      setMessage('Invalid email format');
+                      break;
+                  case 'Email is already in use':
+                      setMessage('Email is already in use');
+                      break;
+                  default:
+                      setMessage('Register failed 400');
+              }
+              break;
+          case 500:
+              setMessage('Can not connect to database');
+              break;
+          default:
+              setMessage('Register failed');
+              break;
+      }
   }
 
   /**

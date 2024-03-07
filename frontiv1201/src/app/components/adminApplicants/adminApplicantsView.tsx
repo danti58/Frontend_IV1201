@@ -6,6 +6,7 @@ type SortKey = 'name' | 'surname'; // Add other keys as needed
 
 type Props = {
   applicants: Array<User>;
+  error: string | null;
 };
 
 /**
@@ -14,7 +15,7 @@ type Props = {
  * @param applicants - The applicants to display
  * @returns - Admin applicants view component
  */
-function AdminApplicantsView({ applicants }: Props) {
+function AdminApplicantsView({ applicants, error }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('name');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [expandedApplicantId, setExpandedApplicantId] = useState<number | null>(null);
@@ -114,6 +115,7 @@ function AdminApplicantsView({ applicants }: Props) {
         <button onClick={() => handleSortChange('surname')}>[Sort by surname]</button>
        
         {sortedApplicants.map(mapApplicants)}
+        {error && <p>{error}</p>}
     </div>
   );
 };

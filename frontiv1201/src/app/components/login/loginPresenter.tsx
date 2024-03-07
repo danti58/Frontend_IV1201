@@ -49,8 +49,23 @@ function LoginPresenter() {
    * @param error - Error message 
    */
   function onLoginFail(error: any) {
-    console.error('Login failed:', error);
-    setMessage('Login failed');
+      console.error('Login failed:', error);
+      switch (error.request.status) {
+          case 0:
+              setMessage('Server is down');
+              break;
+          case 400:
+              setMessage('Username and password are required');
+              break;
+          case 500:
+              setMessage('Username or password is wrong/ can not connect to database');
+              break;
+          default:
+              setMessage('Login failed');
+              break;
+
+      }
+    //setMessage('Login failed');
     }
 
     /**
