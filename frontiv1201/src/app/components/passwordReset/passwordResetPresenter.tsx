@@ -20,7 +20,7 @@ const PasswordResetPresenter: React.FC = () => {
       onResetPasswordSuccess();
     } catch (error) {
         console.warn('Failed to reset password', error);
-        onResetPasswordFailure();
+        onResetPasswordFailure(error);
     }
   };
 
@@ -28,8 +28,19 @@ const PasswordResetPresenter: React.FC = () => {
     setMessage('Password reset successfully');
   }
 
-  const onResetPasswordFailure = () => {
-    setMessage('Failed to reset password');
+    const onResetPasswordFailure = (error: any) => {
+        if (error.request.status === 0) {
+            setMessage('Server is down');
+        }
+        else if (error.request.status === 500) {
+            setMessage('Cannot connect to database');
+        }
+        else if (error.request.status === 401) {
+            setMessage('Invalid or expired token');
+        }
+        else {
+            setMessage('Failed to reset password');
+        }
   }
 
 

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-const testMode = true;
+const testMode = false;
 const BASE_URL = testMode ? 'http://localhost:3000' : 'https://iv1201grupp7-6a51377e6715.herokuapp.co'; 
 
 export interface RegisterData {

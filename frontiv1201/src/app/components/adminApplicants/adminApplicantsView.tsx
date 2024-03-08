@@ -8,6 +8,7 @@ type SortKey = 'name' | 'surname'; // Add other keys as needed
 
 type Props = {
   applicants: Array<User>;
+  error: string | null;
 };
 
 // Updated styles for ApplicantsContainer to center contents
@@ -76,8 +77,7 @@ const ApplicantTitle = styled(Title)`
   * @param {Array<User>} applicants - Array of applicants
   * @returns - Admin applicants view component
  */
-
-const AdminApplicantsView: React.FC<Props> = ({ applicants }) => {
+function AdminApplicantsView({ applicants, error }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('name');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [expandedApplicantId, setExpandedApplicantId] = useState<number | null>(null);
@@ -164,6 +164,7 @@ const AdminApplicantsView: React.FC<Props> = ({ applicants }) => {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       {filteredApplicants.map(mapApplicants)}
+      {error && <p>{error}</p>}
     </ApplicantsContainer>
     </>
   );

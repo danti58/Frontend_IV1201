@@ -11,6 +11,7 @@ interface Props {
   successMessage: string;
   setSuccessMessage: (successMessage: string) => void;
   currentAvailabilities: any[];
+  error: string | null;
 }
 import styled from 'styled-components';
 
@@ -53,7 +54,7 @@ const WhiteContainer = styled(Container)`
   * @returns - a view for availability management
  */
 
-const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage, currentAvailabilities }) => {
+const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityData, handleDateSelect, successMessage, currentAvailabilities, error }) => {
   function renderAvailabilities() {
     for (let i = 0; i < currentAvailabilities.length; i++) {
 
@@ -74,6 +75,7 @@ const AvailabilityView: React.FC<Props> = ({ availabilityData, setAvailabilityDa
       <WhiteContainer>
 
         {successMessage && <p>{successMessage}</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <StyledForm onSubmit={handleDateSelect}>
           <LabelTitle>
             <Label>

@@ -27,8 +27,10 @@ const userState = useSelector((state: any) => state.auth.userState);
     
  
   });
-
-
+  /**
+   * State to store the error message when adding a competency fails.
+   */
+  const [error, setError] = React.useState<string | null>(null);
 
  
 /**
@@ -55,6 +57,18 @@ const [successMessage, setSuccessMessage] = React.useState<string>('');
    */
     function onAddCompetencyFail(error: any) {
         console.error('Add competence failed:', error);
+        if (error.request.status === 0) {
+            setError('Server is down');
+        }
+        else if (error.request.status === 500) {
+            setError('Cannot connect to database');
+        }
+        else if (error.request.status === 400) {
+            setError('RequestedUsername, competencyName, and yearsOfExperienceare required');
+        }
+        else {
+            setError('Add competence failed');
+        }
     }
 
 
@@ -85,8 +99,8 @@ const [successMessage, setSuccessMessage] = React.useState<string>('');
 
 
 
-  return <CompetenciesView competencyData={competencyData} setCompetencyData={setCompetencyData}  handleChange={handleChange} 
-  successMessage={successMessage} setSuccessMessage={setSuccessMessage}  />;
+    return <CompetenciesView competencyData={competencyData} setCompetencyData={setCompetencyData} handleChange={handleChange}
+        successMessage={successMessage} setSuccessMessage={setSuccessMessage} error={error} />;
 };
 
 export default CompetenciesPresenter;

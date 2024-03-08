@@ -48,6 +48,7 @@ interface Props {
   handleChange: (event: React.FormEvent<HTMLFormElement>) => void;
   successMessage: string;
   setSuccessMessage: (successMessage: string) => void;
+  error: string | null;
 }
 
 /**
@@ -64,9 +65,11 @@ const CompetenciesView: React.FC<Props> = ({
   setCompetencyData,
   handleChange,
   successMessage,
+  error
 }) => (
   <CompetenciesCard>
     {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
+    {error && <p>{error}</p>}
     <Form onSubmit={handleChange}>
       <FormField>
         <Label>Competency name:</Label>

@@ -21,6 +21,8 @@ function AvailabilityPresenter() {
   });
 
   const [successMessage, setSuccessMessage] = React.useState<string>('');
+  
+ const [error, setError] = React.useState<string | null>(null);
 
   // Fetch the current availabilities from the API
 
@@ -47,17 +49,34 @@ function AvailabilityPresenter() {
     console.error('Get availability failed:', error);
   }
 
-
+ /**
+     * Handles the success when adding availability to the API.
+     * 
+     * @param response - Response from the API call after successful availability addition
+     */
   function onAddvailabilitySuccess(response: any) {
     // print response json:
     setSuccessMessage('Availability successfully added!');
     console.log('Add availability success:', response);
   }
 
-  function onAddavailabilityFail(error: any) {
-    setSuccessMessage('Error in onAddavailabilityFail');
-    console.error('Add availability failed:', error);
-  }
+  /**
+   * Handles the error when adding availability to the API.
+   * 
+   * @param error
+   */
+    function onAddavailabilityFail(error: any) {
+        console.error('Add availability failed:', error);
+        if (error.request.status === 0) {
+            setError('Server is down');
+        }
+        else if (error.request.status === 500) {
+            setError('Cannot connect to database');
+        }
+        else {
+            setError('Add availability failed');
+        }
+    }
 
   // Inside component
   const handleDateSelect = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -84,6 +103,7 @@ function AvailabilityPresenter() {
       successMessage={successMessage}
       setSuccessMessage={setSuccessMessage}
       currentAvailabilities={currentAvailabilities}
+      error={error}
     />
   );
 }

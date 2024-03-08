@@ -23,10 +23,26 @@ const PasswordResetLinkRequestPresenter: React.FC = () => {
       // Navigate to the password reset page
       router.push('/passwordResetPage');
     } catch (error) {
-      console.warn('Failed to reset password', error);
-      setMessage('Failed to send password reset link');
+        console.warn('Failed to reset password', error);
+        onResetPasswordLinkRequestError(error);
     }
   };
+
+    function onResetPasswordLinkRequestError(error: any) {
+        console.error('Failed to reset password', error);
+        if(error.request.status === 0){
+            setMessage('Server is down');
+        }
+        else if (error.request.status === 500){
+            setMessage('Cannot connect to database');
+        }
+        else if (error.request.status === 404) {
+            setMessage('Person not found');
+        }
+        else {
+            setMessage('Failed to send password reset link');
+        }
+    }
 
   const onEmailChange = (newEmail: string) => {
     setEmail(newEmail);
