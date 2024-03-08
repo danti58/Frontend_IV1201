@@ -49,7 +49,7 @@ function RegisterPresenter () {
    */
   function onRegisterFail(error: any) {
     //setMessage('Register failed');
-      console.error('Register failed:', error);
+      //console.error('Register failed:', error);
       switch (error.request.status) {
           case 0:
               setMessage('Server is down');

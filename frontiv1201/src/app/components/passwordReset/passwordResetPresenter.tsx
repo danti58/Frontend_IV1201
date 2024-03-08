@@ -19,7 +19,7 @@ const PasswordResetPresenter: React.FC = () => {
       console.log('response:', response);
       onResetPasswordSuccess();
     } catch (error) {
-        console.warn('Failed to reset password', error);
+        //console.warn('Failed to reset password', error);
         onResetPasswordFailure(error);
     }
   };

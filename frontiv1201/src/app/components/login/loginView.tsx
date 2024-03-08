@@ -49,6 +49,14 @@ interface Props {
   message: string | null;
 }
 
+/**
+ * View for the login page 
+ * @param loinData - object conaining login data
+ * @param setLoginData - function for setting login data
+ * @param handleLogin - function for handling login form submission
+ * @param message - message displaying erroror success
+ * @returns - a wiew for login
+ */
 const LoginView: React.FC<Props> = ({ loginData, setLoginData, handleLogin, message }) => (
   <LoginCard>
     <Title>Login</Title>
