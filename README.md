@@ -27,7 +27,7 @@ Applicants register using a web browser and provide personal information, a comp
 Recruiters can manage job applications using a web browser.
 
 #### Current Functionality
-- Recruiters can sort applications and mark them as accepted, rejected, or unhandled.
+- Recruiters can sort applications and mark them as accepted, rejected, or unhandled. The web app has been tested successfully in 4 browsers; Safari, Firefox, Chrome and Edge.
 
 #### Future Functionality
 - A mobile app for recruiters to handle applications.
@@ -35,8 +35,6 @@ Recruiters can manage job applications using a web browser.
 
 ## Existing Database Model
 The current system has an undocumented database. Existing data must be transferred to the new system using provided SQL scripts.
-
-
 
 ## Use Cases
 Use cases detail desired functionality, including creating an account, login, applying for a position, listing all applications, and showing application details.
