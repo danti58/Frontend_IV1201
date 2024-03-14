@@ -23,13 +23,13 @@ const PasswordResetLinkRequestPresenter: React.FC = () => {
       // Navigate to the password reset page
       router.push('/passwordResetPage');
     } catch (error) {
-        console.warn('Failed to reset password', error);
+        //console.warn('Failed to reset password', error);
         onResetPasswordLinkRequestError(error);
     }
   };
 
     function onResetPasswordLinkRequestError(error: any) {
-        console.error('Failed to reset password', error);
+        //console.error('Failed to reset password', error);
         if(error.request.status === 0){
             setMessage('Server is down');
         }

@@ -56,7 +56,6 @@ const [successMessage, setSuccessMessage] = React.useState<string>('');
    * @param error - Error message
    */
     function onAddCompetencyFail(error: any) {
-        console.error('Add competence failed:', error);
         if (error.request.status === 0) {
             setError('Server is down');
         }

@@ -49,7 +49,6 @@ function LoginPresenter() {
    * @param error - Error message 
    */
   function onLoginFail(error: any) {
-      console.error('Login failed:', error);
       switch (error.request.status) {
           case 0:
               setMessage('Server is down');

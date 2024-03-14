@@ -66,7 +66,6 @@ function AvailabilityPresenter() {
    * @param error
    */
     function onAddavailabilityFail(error: any) {
-        console.error('Add availability failed:', error);
         if (error.request.status === 0) {
             setError('Server is down');
         }
