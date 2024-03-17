@@ -76,6 +76,9 @@ The folder structure of our frontend repository is organized as follows:
 
 Feel free to explore and modify these directories as needed.
 
+## Project Architectural Decisions
+You can find the document for the project's architectural decisions [here](https://docs.google.com/document/d/1gWo1ijLxyZT4eF8KKFxvUuuaw3QfT_TpaXjfWpQ4A_A/edit?usp=sharing).
+
 ## Contributing
 We welcome contributions from everyone! If you'd like to contribute to the frontend development, please follow these guidelines:
 
